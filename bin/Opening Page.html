@@ -5,27 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
+<link rel="stylesheet" href="Nav_Style.css">
+<script type="text/javascript" src="Nav_Funcs.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
 <body>
 
 <!-- Side Navigation -->
 <nav class="w3-sidebar w3-bar-block w3-card w3-animate-left w3-center" style="display:none" id="mySidebar">
-    <h1 class="w3-xxxlarge w3-text-theme">Side Navigation</h1>
-    <button class="w3-bar-item w3-button" onclick="w3_close()">Close <i class="fa fa-remove"></i></button>
-    <a href="#" class="w3-bar-item w3-button">Link 1</a>
-    <a href="#" class="w3-bar-item w3-button">Link 2</a>
-    <a href="#" class="w3-bar-item w3-button">Link 3</a>
-    <a href="#" class="w3-bar-item w3-button">Link 4</a>
+    <h1 style="font-size: 1.5em">Menu</h1>
+    <a href="CourseReference.html" class="w3-bar-item w3-button">Learn</a>
+    <a href="#" class="w3-bar-item w3-button">Test</a>
+    <a href="#" class="w3-bar-item w3-button">LeaderBoard</a>
+    <a href="#" class="w3-bar-item w3-button">LogOut</a>
+    <button class="w3-bar-item w3-button" onclick="nav_close()">Close <i class="fa fa-remove"></i></button>
 </nav>
 
+
+<!-- Main Body to Allow for Blurring -->
+<div id="main">
 <!-- Header -->
 <header class="w3-container w3-theme w3-padding" id="myHeader">
-    <i onclick="w3_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i>
+    <i onclick="nav_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i>
     <div class="w3-center">
         <h4>Welcome to </h4>
         <h1 class="w3-xxxlarge w3-animate-bottom">my q Learner</h1>
         <div class="w3-padding-32">
-            <button class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey" onclick="document.getElementById('id01').style.display='block'" style="font-weight:900;">LEARN W3.CSS</button>
+            <button class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey" onclick="document.getElementById('id01').style.display='block'" style="font-weight:900;">Help</button>
         </div>
     </div>
 </header>
@@ -36,50 +41,50 @@
         <header class="w3-container w3-theme-l1">
         <span onclick="document.getElementById('id01').style.display='none'"
               class="w3-button w3-display-topright">×</span>
-            <h4>Oh snap! We just showed you a modal..</h4>
-            <h5>Because we can <i class="fa fa-smile-o"></i></h5>
+            <h4>Click on any of the icons below to access the content</h4>
+            <h5>Or Click on the Side Navigation to visit a feature of the web site<i class="fa fa-smile-o"></i></h5>
         </header>
         <div class="w3-padding">
             <p>Cool huh? Ok, enough teasing around..</p>
-            <p>Go to our <a class="w3-btn" href="/w3css/default.asp">W3.CSS Tutorial</a> to learn more!</p>
+            <p>Go to the <a class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey" href="http://code.kx.com/q/">KX Wiki</a> to learn more!</p>
         </div>
         <footer class="w3-container w3-theme-l1">
-            <p>Modal footer</p>
+            <p>Enjoy!</p>
         </footer>
     </div>
 </div>
-
 <div class="w3-row-padding w3-center w3-margin-top">
     <div class="w3-third">
         <div class="w3-card w3-container" style="min-height:460px">
-            <h3>Responsive</h3><br>
-            <i class="fa fa-desktop w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
-            <p>Built-in responsiveness</p>
-            <p>Mobile first fluid grid</p>
-            <p>Fits any screen sizes</p>
-            <p>PC Tablet and Mobile</p>
+            <h3>Study</h3><br>
+            <i class="fa fa-pencil w3-margin-bottom w3-text-theme" style="font-size:120px" onclick=location.href="CourseReference.html"></i>
+            <p>Learn the fundamentals</p>
+            <p>of q/kdb+ to achieve the</p>
+            <p>status of q-God</p>
+
         </div>
     </div>
 
     <div class="w3-third">
         <div class="w3-card w3-container" style="min-height:460px">
-            <h3>Standard CSS</h3><br>
-            <i class="fa fa-css3 w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
-            <p>Standard CSS only</p>
-            <p>Easy to learn</p>
-            <p>No need for jQuery</p>
-            <p>No JavaScript library</p>
+            <h3>Test</h3><br>
+            <i class="fa fa-graduation-cap w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+            <p>Think you are ready to</p>
+            <p>test your q knowledge?</p>
+            <p>Click here to try our</p>
+            <p>interactive q tasks</p>
         </div>
     </div>
 
     <div class="w3-third">
         <div class="w3-card w3-container" style="min-height:460px">
-            <h3>Design</h3><br>
-            <i class="fa fa-diamond w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
-            <p>Paper like design</p>
-            <p>Bold colors and shadows</p>
-            <p>Equal across platforms</p>
-            <p>Equal across devices</p>
+            <h3>Leaderboard</h3><br>
+            <i class="fa fa-star w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+            <p>Track your performance</p>
+            <p>thus far and Compare</p>
+            <p>yourself to those</p>
+            <p>around you learning q</p>
         </div>
     </div>
+</div>
 </div>
