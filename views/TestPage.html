@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<title>Course Reference</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
+<link rel="stylesheet" href="Nav_Style.css">
+<script type="text/javascript" src="Nav_Funcs.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+<body>
+
+
+<!-- Side Navigation -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-animate-left w3-center" style="display:none" id="mySidebar">
+    <h1 style="font-size: 1.5em">Menu</h1>
+    <a href="OpeningPage.html" class="w3-bar-item w3-button">Home</a>
+    <a href="CourseReference.html" class="w3-bar-item w3-button">Learn</a>
+    <a href="#" class="w3-bar-item w3-button">LeaderBoard</a>
+    <a href="#" class="w3-bar-item w3-button">LogOut</a>
+    <button class="w3-bar-item w3-button" onclick="nav_close()">Close <i class="fa fa-remove"></i></button>
+</nav>
+
+<!-- Main Body to Allow for Blurring -->
+<div id="main">
+    <!-- Modal -->
+    <div id="id01" class="w3-modal">
+        <div class="w3-modal-content w3-card-4 w3-animate-top">
+            <header class="w3-container w3-theme-l1">
+        <span onclick="document.getElementById('id01').style.display='none'"
+              class="w3-button w3-display-topright">×</span>
+                <h4>Click on any of the icons below to access the content</h4>
+                <h5>Or Click on the Side Navigation to visit a feature of the web site<i class="fa fa-smile-o"></i></h5>
+            </header>
+            <div class="w3-padding">
+                <p>Cool huh? Ok, enough teasing around..</p>
+                <p>Go to the <a class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey" href="http://code.kx.com/q/">KX
+                    Wiki</a> to learn more!</p>
+            </div>
+            <footer class="w3-container w3-theme-l1">
+                <p>Enjoy!</p>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="w3-container w3-theme w3-padding" id="myHeader">
+        <i onclick="nav_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i>
+        <div class="w3-center">
+            <h1 class="w3-xxxlarge w3-animate-bottom">Testing</h1>
+            <div class="w3-padding-1">
+                <button class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey"
+                        onclick="document.getElementById('id01').style.display='block'" style="font-weight:900;">Help
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="w3-container w3-grey">
+        <p>Welcome to the Testing Environment for q/KDB+. Click connect to access the q Server</p>
+    </div>
+
+
+
+    <hr>
+<div class="w3-row-padding">
+
+    <div class="w3-half">
+        <div class="w3-card black">
+            <div class="w3-container w3-grey">
+                <h3>Input Environment</h3>
+            </div>
+            <div class="w3-container" style="height: 20em">
+                <input class="w3-input w3-border-0" type="text" id="x" placeholder="q)" style="width:100%" style="height:20em">
+            </div>
+            <ul class="w3-ul w3-border-top">
+                <li>
+
+                </li>
+
+            </ul>
+            <div class="w3-container w3-grey w3-large"><span class="w3-right">Run</span></div>
+        </div>
+    </div>
+
+    <div class="w3-half">
+        <div class="w3-card white">
+            <div class="w3-container w3-theme">
+                <h3>Output</h3>
+            </div>
+            <div class="w3-container">
+            </div>
+            <ul class="w3-ul w3-border-top">
+                <li>
+                    <h3>expected Output here</h3>
+                </li>
+
+            </ul>
+            <div class="w3-container w3-theme w3-large"><span class="w3-right">Next</span></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+</div>

@@ -1,4 +1,5 @@
 // Side navigation
+module.exports = {
 function nav_open() {
     var x = document.getElementById("mySidebar");
     x.style.width = "25%";
@@ -23,4 +24,26 @@ function myAccFunc(id) {
         x.previousElementSibling.className =
             x.previousElementSibling.className.replace(" w3-green", "");
     }
+}
+
+var ws,out=document.getElementById("out");
+function connect()
+{if ("WebSocket" in window)
+{var l = window.location;ws = new WebSocket("ws://" + (l.hostname ? l.hostname : "localhost") + ":" + (l.port ? l.port : "5050") + "/");
+    out.value="connecting..." ;
+    ws.onopen=function(e){out.value="connected";}
+    ws.onclose=function(e){out.value="disconnected";}
+    ws.onmessage=function(e){out.value=e.data;}
+    ws.onerror=function(e){out.value=e.data;}
+}else alert("WebSockets not supported on your browser.");
+}
+function send()
+{x=document.getElementById("x");
+    v=x.value;
+    ws.send(v);
+    out.value="sent "+v;
+
+
+    return false;
+}
 }
