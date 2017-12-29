@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></head>
+<title>Test Menu</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+<body>
+
+
+<!-- Side Navigation -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-animate-left w3-center" style="display:none" id="mySidebar">
+    <h1 style="font-size: 1.5em">Menu</h1>
+    <a href="OpeningPage" class="w3-bar-item w3-button">Home</a>
+    <a href="CourseReference" class="w3-bar-item w3-button">Learn</a>
+    <a href="#" class="w3-bar-item w3-button">LeaderBoard</a>
+    <a href="#" class="w3-bar-item w3-button">LogOut</a>
+    <button class="w3-bar-item w3-button" onclick="nav_close()">Close <i class="fa fa-remove"></i></button>
+</nav>
+
+<!-- Main Body to Allow for Blurring -->
+<div id="main">
+    <!-- Modal -->
+    <div id="id01" class="w3-modal">
+        <div class="w3-modal-content w3-card-4 w3-animate-top">
+            <header class="w3-container w3-theme-l1">
+        <span onclick="document.getElementById('id01').style.display='none'"
+              class="w3-button w3-display-topright">×</span>
+                <h4>Click on any of the icons below to access the content</h4>
+                <h5>Or Click on the Side Navigation to visit a feature of the web site<i class="fa fa-smile-o"></i></h5>
+            </header>
+            <div class="w3-padding">
+                <p>Cool huh? Ok, enough teasing around..</p>
+                <p>Go to the <a class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey" href="http://code.kx.com/q/">KX
+                    Wiki</a> to learn more!</p>
+            </div>
+            <footer class="w3-container w3-theme-l1">
+                <p>Enjoy!</p>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="w3-container w3-theme w3-padding" id="myHeader">
+        <i onclick="nav_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i>
+        <div class="w3-center">
+            <h1 class="w3-xxxlarge w3-animate-bottom">Testing Menu</h1>
+            <div class="w3-padding-1">
+                <button class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey"
+                        onclick="document.getElementById('id01').style.display='block'" style="font-weight:900;">Help
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="w3-container w3-grey">
+        <p>Welcome to the Testing Environment for q/KDB+. Click a challenge that you would like to complete access the q Server</p>
+    </div>
+    <header class="w3-large w3-dark-grey">DataTypes</header>
+    <div class="grid-container">
+        <button class="w3-btn w3-light-grey w3-hover-blue"><h3>Atoms<div class="fa fa-stop-circle-o fa-lg" style="padding-left: 10%"></div></h3></button>
+        <button class="w3-btn w3-light-grey w3-hover-blue"><h3>Lists<div class="fa fa-list fa-lg" style="padding-left: 10%"></div></h3></button>
+        <button class="w3-btn w3-light-grey w3-hover-blue"><h3>Dictionaries<div class="fa fa-book fa-lg" style="padding-left: 10%"></div></h3></button>
+        <button class="w3-btn w3-light-grey w3-hover-blue"><h3>Tables<div class="fa fa-table fa-lg" style="padding-left: 10%"></div></h3></button>
+</div>
+    <header class="w3-large w3-dark-grey">Functions</header>
+    <div class="grid-container">
+        <button class="w3-btn w3-light-grey w3-hover-blue"><h3>Primitive Operators<div class="fa fa-wrench fa-lg" style="padding-left: 10%"></div></h3></button>
+        <button class="w3-btn w3-light-grey w3-hover-blue"><h3>Lambdas<div class="fa fa-file-code-o fa-lg" style="padding-left: 10%"></div></h3></button>
+        <button class="w3-btn w3-light-grey w3-hover-blue"><h3>Casting<div class="fa fa-shield fa-lg" style="padding-left: 10%"></div></h3></button>
+        <button class="w3-btn w3-light-grey w3-hover-blue"><h3>Projections<div class="fa fa-magic fa-lg" style="padding-left: 10%"></div></h3></button>
+    </div>
+    <header class="w3-large w3-dark-grey">More Coming Soon...</header>
+    <div class="grid-container">
+    </div>
+
+    <div class="w3-row-padding">
+
+    </div>
+
+    <script>
+        function nav_open() {
+            var x = document.getElementById("mySidebar");
+            x.style.width = "25%";
+            x.style.fontSize = "40px";
+            x.style.paddingTop = "10%";
+            x.style.display = "block";
+            x.style.color = "white";
+            x.style.backgroundColor = "#0099ff";
+            document.getElementById("main").classList.toggle("blurmain");
+        }
+        function nav_close() {
+            document.getElementById("mySidebar").style.display = "none";
+            document.getElementById("main").classList.toggle("blurmain");
+        }
+        function connLight() {
+            document.getElementsByName("Light").classList.toggle("blurmain");
+        }
+    </script>
+    <style>
+        .blurmain {
+            filter: blur(5px);
+        }
+        .grid-container {
+            display: grid;
+            height: auto;
+            align-content: center;
+            grid-template-columns: auto auto auto auto;
+            grid-gap: 10px;
+            background-color: #cac1ce;
+            padding: 10px;
+        }
+        .grid-container > button {
+            background-color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            padding: 20px 0;
+            font-size: 25px;
+        }
+    </style>
+
+
+
+</div>

@@ -5,8 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
-<link rel="stylesheet" href="Nav_Style.css">
-<script type="text/javascript" src="Nav_Funcs.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
 <body>
 
@@ -14,8 +12,8 @@
 <!-- Side Navigation -->
 <nav class="w3-sidebar w3-bar-block w3-card w3-animate-left w3-center" style="display:none" id="mySidebar">
     <h1 style="font-size: 1.5em">Menu</h1>
-    <a href="OpeningPage.html" class="w3-bar-item w3-button">Home</a>
-    <a href="CourseReference.html" class="w3-bar-item w3-button">Learn</a>
+    <a href="OpeningPage" class="w3-bar-item w3-button">Home</a>
+    <a href="CourseReference" class="w3-bar-item w3-button">Learn</a>
     <a href="#" class="w3-bar-item w3-button">LeaderBoard</a>
     <a href="#" class="w3-bar-item w3-button">LogOut</a>
     <button class="w3-bar-item w3-button" onclick="nav_close()">Close <i class="fa fa-remove"></i></button>
@@ -57,7 +55,12 @@
     </header>
 
     <div class="w3-container w3-grey">
-        <p>Welcome to the Testing Environment for q/KDB+. Click connect to access the q Server</p>
+        <p>Welcome to the Testing Environment for q/KDB+. Click
+            <button class="w3-btn w3-dark-grey w3-hover-light-grey" onclick="connLight()" name="light">Connect</button>
+            to access the q Server
+            <object class="led-red" id="connLight"></object>
+            </p>
+
     </div>
 
 
@@ -70,8 +73,8 @@
             <div class="w3-container w3-grey">
                 <h3>Input Environment</h3>
             </div>
-            <div class="w3-container" style="height: 20em">
-                <input class="w3-input w3-border-0" type="text" id="x" placeholder="q)" style="width:100%" style="height:20em">
+            <div class="w3-container" style="height:3.8em;">
+                <input class="w3-input" type="text" id="x" placeholder="q)">
             </div>
             <ul class="w3-ul w3-border-top">
                 <li>
@@ -101,7 +104,46 @@
     </div>
 </div>
 
-
+    <script>
+        function nav_open() {
+            var x = document.getElementById("mySidebar");
+            x.style.width = "25%";
+            x.style.fontSize = "40px";
+            x.style.paddingTop = "10%";
+            x.style.display = "block";
+            x.style.color = "white";
+            x.style.backgroundColor = "#0099ff";
+            document.getElementById("main").classList.toggle("blurmain");
+        }
+        function nav_close() {
+            document.getElementById("mySidebar").style.display = "none";
+            document.getElementById("main").classList.toggle("blurmain");
+        }
+        function connLight() {
+            document.getElementsByName("Light").classList.toggle("blurmain");
+        }
+    </script>
+    <style>
+        .blurmain {
+            filter: blur(5px);
+        }
+        .led-green {
+            width: 14px;
+            margin-left: 4em;
+            height: 14px;
+            background-color: #89c400;
+            border-radius: 50%;
+            box-shadow: #000000 0 -1px 7px 1px, inset #699a00 0 -1px 9px, #80e900 0 2px 12px;
+        }
+        .led-red {
+            width: 14px;
+            margin-left: 4em;
+            height: 14px;
+            background-color: #c7312e;
+            border-radius: 50%;
+            box-shadow: #000000 0 -1px 7px 1px, inset #861811 0 -1px 9px, #cb3338 0 2px 12px;
+        }
+    </style>
 
 
 

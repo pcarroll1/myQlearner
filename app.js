@@ -7,7 +7,12 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-
+var tools = require('./views/Nav_Funcs');
+console.log(typeof Nav_Funcs.fOpen());
+console.log(typeof Nav_Funcs.fClose());
+console.log(typeof Nav_Funcs.fAccFunc());
+console.log(typeof Nav_Funcs.connect); 
+console.log(typeof Nav_Funcs.send);
 var app = express();
 
 // view engine setup
