@@ -16,7 +16,7 @@
     <a href="CourseReference" class="w3-bar-item w3-button">Learn</a>
     <a href="#" class="w3-bar-item w3-button">LeaderBoard</a>
     <a href="#" class="w3-bar-item w3-button">LogOut</a>
-    <button class="w3-bar-item w3-button" onclick="nav_close()">Close <i class="fa fa-remove"></i></button>
+    <button class="w3-bar-item w3-button" onclick="connect()">Close <i class="fa fa-remove"></i></button>
 </nav>
 
 <!-- Main Body to Allow for Blurring -->
@@ -56,16 +56,13 @@
 
     <div class="w3-container w3-grey">
         <p>Welcome to the Testing Environment for q/KDB+. Click
-            <button class="w3-btn w3-dark-grey w3-hover-light-grey" onclick="connLight()" name="light">Connect</button>
+            <button class="w3-btn w3-dark-grey w3-hover-light-grey" onclick=connect()>Connect</button>
             to access the q Server
-            <object class="led-red" id="connLight"></object>
+            <object class="led" id="Light" align="right"></object>
             </p>
 
     </div>
 
-
-
-    <hr>
 <div class="w3-row-padding">
 
     <div class="w3-half">
@@ -82,7 +79,7 @@
                 </li>
 
             </ul>
-            <div class="w3-container w3-grey w3-large"><span class="w3-right">Run</span></div>
+            <div class="w3-container w3-grey w3-large"><button class="w3-btn w3-hover-green" style="margin-left: 90%" onclick="return send()"><div class="fa fa-play fa-lg"></div></button></div>
         </div>
     </div>
 
@@ -93,18 +90,41 @@
             </div>
             <div class="w3-container">
             </div>
-            <ul class="w3-ul w3-border-top">
+            <ul class="w3-ul w3-border-top" style="background-color: dimgrey;">
                 <li>
-                    <h3>expected Output here</h3>
+                    <textarea id="out" rows=10 cols=71.5 style="background-color: #888888" ></textarea>
                 </li>
 
             </ul>
-            <div class="w3-container w3-theme w3-large"><span class="w3-right">Next</span></div>
+            <div class="w3-container w3-theme w3-large"><span class="w3-right"></span></div>
         </div>
     </div>
 </div>
 
     <script>
+        var ws,out=document.getElementById("out");
+        function connect()
+        {if ("WebSocket" in window)
+        {var l = window.location;ws = new WebSocket("ws://localhost:5050/");
+            out.value="connecting..." ;
+            ws.onopen=function(e){out.value="You are now connected to the q server session";conn = true;connLight(conn)}
+            ws.onclose=function(e){out.value="Unfortunately connection cannot be made to the q server session please click the connect button to reconnect to the server";conn = false;;connLight(conn)}
+            connLight(conn);
+            ws.onmessage=function(e){out.value=e.data;}
+            ws.onerror=function(e){out.value=e.data;}
+        }else alert("WebSockets not supported on your browser.");
+        }
+
+        function send()
+        {x=document.getElementById("x");
+            v=x.value;
+            ws.send(v);
+            out.value="sent "+v;
+
+
+            return false;
+        }
+
         function nav_open() {
             var x = document.getElementById("mySidebar");
             x.style.width = "25%";
@@ -119,30 +139,35 @@
             document.getElementById("mySidebar").style.display = "none";
             document.getElementById("main").classList.toggle("blurmain");
         }
-        function connLight() {
-            document.getElementsByName("Light").classList.toggle("blurmain");
-        }
+            function connLight(conn) {
+                var x = document.getElementById("Light");
+                if (conn === true) {
+                    x.style.display = "inline";
+                    x.style.backgroundColor = "#89C400";
+                    x.style.boxShadow = "#000000 0 -1px 7px 1px, inset #699a00 0 -1px 9px, #80e900 0 2px 12px";
+                } else {
+                    x.style.display = "inline";
+                    x.style.backgroundColor = "#C7312E";
+                    x.style.boxShadow = "#000000 0 -1px 7px 1px, inset #861811 0 -1px 9px, #cb3338 0 2px 12px"
+                }
+            }
+        window.onload = connect();
+
     </script>
     <style>
         .blurmain {
             filter: blur(5px);
         }
-        .led-green {
-            width: 14px;
-            margin-left: 4em;
-            height: 14px;
-            background-color: #89c400;
+        .led {
+            width: 16px;
+            alignment: right;
+            margin-top: 1em;
+            height: 16px;
             border-radius: 50%;
-            box-shadow: #000000 0 -1px 7px 1px, inset #699a00 0 -1px 9px, #80e900 0 2px 12px;
+            background-color: #888888;
+            box-shadow: #000000 0 -1px 7px 1px, inset #bcb6b6 0 -1px 9px, #cbc2ca 0 2px 12px;
         }
-        .led-red {
-            width: 14px;
-            margin-left: 4em;
-            height: 14px;
-            background-color: #c7312e;
-            border-radius: 50%;
-            box-shadow: #000000 0 -1px 7px 1px, inset #861811 0 -1px 9px, #cb3338 0 2px 12px;
-        }
+
     </style>
 
 

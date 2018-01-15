@@ -1,19 +1,28 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var expressValidator = require('express-validator');
+var flash = require('connect-flash');
+var session = require('express-session');
+var passport = require('passport');
+var LocalStrategy = require('passport-local');
+var mongo = require('mongodb');
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/myQlearner');
+var db = mongoose.connection;
+
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-var tools = require('./views/Nav_Funcs');
+
 console.log(typeof Nav_Funcs.fOpen());
 console.log(typeof Nav_Funcs.fClose());
 console.log(typeof Nav_Funcs.fAccFunc());
 console.log(typeof Nav_Funcs.connect); 
 console.log(typeof Nav_Funcs.send);
-var app = express();
+var app = express(); // Initialising the App
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -36,6 +45,31 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+
+// Passport init
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Express Validator
+app.use(expressValidator({
+    errorFormatter: function(param, msg, value) {
+        var namespace = param.split('.')
+            , root    = namespace.shift()
+            , formParam = root;
+
+        while(namespace.length) {
+            formParam += '[' + namespace.shift() + ']';
+        }
+        return {
+            param : formParam,
+            msg   : msg,
+            value : value
+        };
+    }
+}));
+
+// Connect Flash
+app.use(flash());
 
 // error handler
 app.use(function(err, req, res, next) {
