@@ -15,4 +15,7 @@ module.exports = function(app)
     app.get('/OpeningPage',function(req,res){
         res.render('OpeningPage.html')
     });
-}
+    app.get('/LeaderBoard',function(req,res){
+        res.render('LeaderBoard.html')
+    });
+};

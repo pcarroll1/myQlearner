@@ -4,6 +4,7 @@
 <title>Test Menu</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -23,64 +24,114 @@
 <!-- Main Body to Allow for Blurring -->
 <div id="main">
     <!-- Modal -->
-    <div id="id01" class="w3-modal">
-        <div class="w3-modal-content w3-card-4 w3-animate-top">
-            <header class="w3-container w3-theme-l1">
-        <span onclick="document.getElementById('id01').style.display='none'"
-              class="w3-button w3-display-topright">×</span>
-                <h4>Click on any of the icons below to access the content</h4>
-                <h5>Or Click on the Side Navigation to visit a feature of the web site<i class="fa fa-smile-o"></i></h5>
-            </header>
-            <div class="w3-padding">
-                <p>Cool huh? Ok, enough teasing around..</p>
-                <p>Go to the <a class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey" href="http://code.kx.com/q/">KX
-                    Wiki</a> to learn more!</p>
-            </div>
-            <footer class="w3-container w3-theme-l1">
-                <p>Enjoy!</p>
-            </footer>
-        </div>
-    </div>
+
 
     <!-- Header -->
     <header class="w3-container w3-theme w3-padding" id="myHeader">
         <i onclick="nav_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i>
         <div class="w3-center">
-            <h1 class="w3-xxxlarge w3-animate-bottom">Testing Menu</h1>
+            <h1 class="w3-xxxlarge w3-animate-bottom">Leader Board</h1>
             <div class="w3-padding-1">
                 <button class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey"
-                        onclick="document.getElementById('id01').style.display='block'" style="font-weight:900;">Help
+                        onclick="document.getElementById().style.display='block'" style="font-weight:900;">Help
                 </button>
             </div>
         </div>
     </header>
 
-    <div class="w3-container w3-grey">
-        <p>Welcome to the Testing Environment for q/KDB+. Click a challenge that you would like to complete access the q Server</p>
-    </div>
-    <header class="w3-large w3-dark-grey">DataTypes</header>
-    <div class="grid-container">
-        <button class="w3-btn w3-light-grey w3-hover-blue" onclick=location.href="TestPage";sessionStorage.testItem="test1"><h3>Atoms<div class="fa fa-stop-circle-o fa-lg" style="padding-left: 10%" ></div></h3></button>
-        <button class="w3-btn w3-light-grey w3-hover-blue" onclick=location.href="TestPage";sessionStorage.testItem="test2"><h3>Lists<div class="fa fa-list fa-lg" style="padding-left: 10%"></div></h3></button>
-        <button class="w3-btn w3-light-grey w3-hover-blue" onclick=location.href="TestPage";sessionStorage.testItem="test3"><h3>Dictionaries<div class="fa fa-book fa-lg" style="padding-left: 10%"></div></h3></button>
-        <button class="w3-btn w3-light-grey w3-hover-blue"><h3>Tables<div class="fa fa-table fa-lg" style="padding-left: 10%"></div></h3></button>
-</div>
-    <header class="w3-large w3-dark-grey">Functions</header>
-    <div class="grid-container">
-        <button class="w3-btn w3-light-grey w3-hover-blue"><h3>Operators<div class="fa fa-wrench fa-lg" style="padding-left: 10%"></div></h3></button>
-        <button class="w3-btn w3-light-grey w3-hover-blue"><h3>Lambdas<div class="fa fa-file-code-o fa-lg" style="padding-left: 10%"></div></h3></button>
-        <button class="w3-btn w3-light-grey w3-hover-blue"><h3>Casting<div class="fa fa-shield fa-lg" style="padding-left: 10%"></div></h3></button>
-        <button class="w3-btn w3-light-grey w3-hover-blue"><h3>Projections<div class="fa fa-magic fa-lg" style="padding-left: 10%"></div></h3></button>
-    </div>
-    <header class="w3-large w3-dark-grey">More Coming Soon...</header>
-    <div class="grid-container">
+    <div class="w3-container w3-grey" style="height:77em">
+        <!--- Top Left Quarter TABLE --->
+        <div class="w3-quarter" style="height:25%;width:50%;background-color: #00B7FF">
+            <div id="table_div"></div>
+        </div>
+        <!--- Top Right Quarter BARCHART--->
+        <div class="w3-quarter" style="height:25%;width:50%;background-color: #4a8be8">
+            <div id="chart_div" style="height: 100%;border-color: #4a8be8"></div>
+        </div>
+        <!--- Bottom Left Quarter Prog Bars --->
+        <div class="w3-quarter" style="height:25%;width:50%;background-color: #4a8be8;padding: 2%">
+            <h2>Your Progress Bars</h2>
+            <p>See Below your Progress in each segment</p>
+            <div class="progress">
+                <div id="prgBr1" class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow=70 aria-valuemin="0" aria-valuemax="100" style="width:70%">Datatypes</div>
+            </div>
+            <div class="progress">
+                <div id="prgBr2" class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:50%">Functions</div>
+            </div>
+            <div class="progress">
+                <div id="prgBr3" class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:60%">Adverbs</div>
+            </div>
+            <div class="progress">
+                <div id="prgBr4" class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">qSQL</div>
+            </div>
+        </div>
+        <div class="w3-quarter" style="height:25%;width:50%;background-color: #00B7FF"></div>
+
     </div>
 
-    <div class="w3-row-padding">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
 
-    </div>
+        google.charts.load('current', {packages:['table']});
+        google.charts.load('current', {packages: ['corechart', 'bar']});
+        var ws;
 
-    <script>
+        function drawTable() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Name');
+            data.addColumn('string', 'Score');
+            ws.send ("toGoogleTable (`t xdesc select count distinct t by u from UserScore)");
+            ws.onmessage=function(e){a=e.data;sessionStorage.lTable=eval(a)};
+            var kdbRows = eval(eval(sessionStorage.lTable));
+            data.addRows(kdbRows);
+
+            var table = new google.visualization.Table(document.getElementById('table_div'));
+            table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+        }
+
+        function drawBar() {
+
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'User');
+            data.addColumn('number', 'Score');
+            ws.send ("toGoogleBarChart (`t xdesc select count distinct t by u from UserScore)");
+            ws.onmessage=function(e){a=e.data;sessionStorage.BChart=eval(a)};
+            var kdbBars = eval(eval(sessionStorage.BChart));
+            data.addRows(kdbBars);
+
+            var options = {
+                title: 'myQlearner Rankings',
+                chartArea: {width: '50%'},
+                hAxis: {
+                    title: 'Total Scores',
+                    minValue: 0
+                },
+                vAxis: {
+                    title: 'Users'
+                }
+            };
+
+            var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+
+            chart.draw(data, options);
+        }
+
+        function setPrgBars(name) {
+            var prbr1 =  document.getElementById ("prgBr1");
+            var prbr2 =  document.getElementById ("prgBr2");
+            var prbr3 =  document.getElementById ("prgBr3");
+            var prbr4 =  document.getElementById ("prgBr4");
+            ws.onmessage=function(e){a=e.data;sessionStorage.pb=eval(a)};
+            ws.send("getPrg"+name);
+            var progress = sessionStorage.pb.split(",");
+            prbr1.style.width = (progress[0]+"%");
+            prbr2.style.width = (progress[1]+"%");
+            prbr3.style.width = (progress[2]+"%");
+            prbr4.style.width = (progress[3]+"%");
+        }
+
         var ws;
         function myAccFunc(id) {
             var x = document.getElementById(id);
@@ -259,9 +310,6 @@
 
 
 
-        function connLight() {
-            document.getElementsByName("Light").classList.toggle("blurmain");
-        }
 
     </script>
     <style>

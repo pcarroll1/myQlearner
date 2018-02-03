@@ -55,63 +55,51 @@
     </header>
 
     <div class="w3-container w3-grey">
-        <p>Welcome to the Testing Environment for q/KDB+. Click
-            <button class="w3-btn w3-dark-grey w3-hover-light-grey" onclick=connect()>Connect</button>
-            to access the q Server
-            <object class="led" id="Light" align="right"></object>
-            </p>
-
+        <p id="tstTxt">Welcome to the Testing Environment for q/KDB+. Click</p>
     </div>
 
 <div class="w3-row-padding">
 
-    <div class="w3-half">
-        <div class="w3-card black">
-            <div class="w3-container w3-grey">
+    <div class="split left">
+        <div class="w3-card black" style="height: 80%">
+            <div class="w3-container w3-theme">
                 <h3>Input Environment</h3>
             </div>
             <div class="w3-container" style="height:3.8em;">
-                <input class="w3-input" type="text" id="x" placeholder="q)">
+                <input class="w3-input" type="text" id="x" placeholder="q)" style="background-color: lightskyblue;border: none;outline: none" height="100%">
             </div>
-            <ul class="w3-ul w3-border-top">
-                <li>
-
-                </li>
-
-            </ul>
-            <div class="w3-container w3-grey w3-large"><button class="w3-btn w3-hover-green" style="margin-left: 90%" onclick="return send()"><div class="fa fa-play fa-lg"></div></button></div>
+            <div class="w3-container w3-grey w3-large" style="position: relative;top: 65%"  ><button class="w3-btn w3-hover-green" style="margin-left: 90%" onclick="return send()"><div class="fa fa-play fa-lg"></div></button></div>
         </div>
     </div>
 
-    <div class="w3-half">
-        <div class="w3-card white">
-            <div class="w3-container w3-theme">
+    <div class="split right">
+        <div class="w3-card white" style="height: 80%">
+            <div class="w3-container w3-grey">
                 <h3>Output</h3>
             </div>
-            <div class="w3-container">
-            </div>
-            <ul class="w3-ul w3-border-top" style="background-color: dimgrey;">
-                <li>
-                    <textarea id="out" rows=10 cols=71.5 style="background-color: #888888" ></textarea>
-                </li>
+            <div>
+                    <textarea id="out" style="background-color: slategrey;outline: none;border: none;color: white;padding: 1%;margin-bottom: 1.3%" rows=16 cols="77"  ></textarea>
+                <div class="w3-container w3-grey w3-large" style="position: relative;top: 65%;height:44px">
+                    <button class="w3-btn w3-small w3-dark-grey w3-hover-light-grey" style="margin: .7%" onclick=connect()>Connect</button>
+                    <object class="led" id="Light" align="right"></object>
+                </div>
 
-            </ul>
-            <div class="w3-container w3-theme w3-large"><span class="w3-right"></span></div>
+            </div>
         </div>
     </div>
 </div>
 
     <script>
         var ws,out=document.getElementById("out");
+
         function connect()
         {if ("WebSocket" in window)
         {var l = window.location;ws = new WebSocket("ws://localhost:5050/");
             out.value="connecting..." ;
-            ws.onopen=function(e){out.value="You are now connected to the q server session";conn = true;connLight(conn)}
-            ws.onclose=function(e){out.value="Unfortunately connection cannot be made to the q server session please click the connect button to reconnect to the server";conn = false;;connLight(conn)}
-            connLight(conn);
-            ws.onmessage=function(e){out.value=e.data;}
-            ws.onerror=function(e){out.value=e.data;}
+            ws.onopen=function(e){out.value="You are now connected to the q server session";conn = true;connLight(conn)};
+            ws.onclose=function(e){out.value="Unfortunately connection cannot be made to the q server session please click the connect button to reconnect to the server";conn = false;;connLight(conn)};
+            ws.onmessage=function(e){out.value=e.data;};
+            ws.onerror=function(e){out.value=e.data;};
         }else alert("WebSockets not supported on your browser.");
         }
 
@@ -119,7 +107,7 @@
         {x=document.getElementById("x");
             v=x.value;
             ws.send(v);
-            out.value="sent "+v;
+            out.value="Ooops! We encountered a problem, press connect to reconnect to the Server!";
 
 
             return false;
@@ -151,7 +139,18 @@
                     x.style.boxShadow = "#000000 0 -1px 7px 1px, inset #861811 0 -1px 9px, #cb3338 0 2px 12px"
                 }
             }
-        window.onload = connect();
+        function setTest() {
+            var test1 = "Atoms: Write a function that given an atom x, can multiply this by 5";
+            var test2 = "Lists: Write a function that given a list, can output a dictionary of the distinct elements in that list";
+            var test3 = "Dictionaries: Write a function that given two arguments [x;y] can create a dictionary of these arguments (x being the key and y being the value)";
+            var test4 = "Tables: Write a function that given a dictionary (`name`age!(`Tim;18)) can turn this into a table";
+            var s = document.getElementById("tstTxt");
+            s.textContent = eval(sessionStorage.testItem);
+        }
+            window.onload = function() {
+            connect();
+            setTest();
+        }
 
     </script>
     <style>
@@ -166,6 +165,29 @@
             border-radius: 50%;
             background-color: #888888;
             box-shadow: #000000 0 -1px 7px 1px, inset #bcb6b6 0 -1px 9px, #cbc2ca 0 2px 12px;
+        }
+
+        /* Split the screen in half */
+        .split {
+            height: 80%;
+            width: 50%;
+            position: fixed;
+            z-index: 1;
+            /*top: 0; */
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+
+        /* Control the left side */
+        .left {
+            left: 0;
+            background-color: lightskyblue;
+        }
+
+        /* Control the right side */
+        .right {
+            right: 0;
+            background-color: slategrey;
         }
 
     </style>

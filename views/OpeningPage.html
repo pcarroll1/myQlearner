@@ -7,15 +7,16 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
-<body>
+<body onload= chkLogin()>
+
 
 <!-- Side Navigation -->
 <nav class="w3-sidebar w3-bar-block w3-card w3-animate-left w3-center" style="display:none" id="mySidebar">
 	<h1 style="font-size: 1.5em">Menu</h1>
 	<a href="CourseReference" class="w3-bar-item w3-button">Learn</a>
 	<a href="TestMenu" class="w3-bar-item w3-button">Test</a>
-	<a href="#" class="w3-bar-item w3-button">LeaderBoard</a>
-    <a href="#" class="w3-bar-item w3-button">LogOut</a>
+	<a href="LeaderBoard" class="w3-bar-item w3-button">LeaderBoard</a>
+    <a onclick="logout()" class="w3-bar-item w3-button">LogOut</a>
     <button class="w3-bar-item w3-button" onclick="nav_close()">Close <i class="fa fa-remove"></i></button>
 </nav>
 
@@ -25,61 +26,62 @@
 <!-- Header -->
 <header class="w3-container w3-theme w3-padding" id="myHeader">
     <i onclick="nav_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i>
-    <button class="w3-btn2 w3-blue" onclick="document.getElementById('id01').style.display='block'" style="width: 120px;" style="font-weight:900;">Sign Up</button>
+    <button id="sgUp" class="w3-btn2 w3-blue" onclick="document.getElementById('reg').style.display='block'" style="width: 120px;font-weight:900;">Sign Up</button>
+    <div class="fa fa-user fa-lrg" style="padding-left: 10%;font-size: 30px;display: none" id="wStrap"> <h4 id="wMsg" style="font-size: 16px;"></h4></div>
     <div class="w3-center">
         <i class="fa fa-Quora w3-margin-bottom w3" style="font-size:100px"></i>
         <h4>Welcome to </h4>
+        <div class="w3-padding-1">
         <h1 class="w3-xxxlarge w3-animate-bottom">my q Learner</h1>
-        <div class="w3-padding-32">
-            <button class="w3-btn w3-dark-grey w3-hover-light-grey" onclick="document.getElementById('id02').style.display='block';connect()" style="width: 80px;" style="font-weight:900;">Log In</button>
+            <button id="lgIn" class="w3-btn w3-dark-grey w3-hover-light-grey" onclick="document.getElementById('log').style.display='block';connect()" style="width: 80px;font-weight:900">Log In</button>
+        <button id="lgOut" class="w3-btn w3-dark-grey w3-hover-light-grey" onclick="logout()" style="display: none" >Log Out</button>
         </div>
-    </div>
+        </div>
 </header>
 
-<!-- SIGNUP MODAL -->
-    <div id="id01" class="modal1">
-        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+<!-- Register Modal -->
+    <div id="reg" class="modal1">
+        <span onclick="document.getElementById('reg').style.display='none'" class="close" title="Close Modal">×</span>
         <form class="modal-content animate" action="/action_page.php">
             <div class="container">
                 <label><b>Email</b></label>
-                <input type="text" placeholder="Enter Email" name="email" required>
+                <input type="text" placeholder="Enter Username" id="uName" required>
 
                 <label><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
+                <input type="password" placeholder="Enter Password" id="psw" required>
 
                 <label><b>Repeat Password</b></label>
-                <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
-                <input type="checkbox" checked="checked"> Remember me
-                <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+                <input type="password" placeholder="Confirm Password" id="pswrpt" required>
 
                 <div class="clearfix">
-                    <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-                    <button type="submit" class="signupbtn">Sign Up</button>
+                    <button type="button" onclick="document.getElementById('reg').style.display='none'" class="cancelbtn">Cancel</button>
+                    <button type="button" onclick="register()" class="signupbtn">Sign Up</button>
+                    <p id="rError" style="display: none" >There is already an account registered with that UserName</p>
                 </div>
             </div>
         </form>
     </div>
     <!-- LOGIN MODAL -->
-    <div id="id02" class="modal2">
+    <div id="log" class="modal2">
 
         <form class="modal-content animate" action="/action_page.php">
             <div class="imgcontainer">
-                <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <span onclick="document.getElementById('log').style.display='none'" class="close" title="Close Modal">&times;</span>
             </div>
 
             <div class="container">
-                <label><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" id="uname" required>
+                <label><b id="test1">UserName</b></label>
+                <input type="text" placeholder="Enter Username" id="uname1" required>
 
                 <label><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" id="psw" required>
-
-                <button type="button" onclick="document.getElementById('id01').style.display='block';login()" style="width:49.7%;" style="color: #4a8be8">Login</button>
-                <button type="button" onclick="document.getElementById('id01').style.display='block'" style="width:49.7%;" style="color: #ccc">Cancel</button>
+                <input type="password" placeholder="Enter Password" id="psw1" required>
+                <button type="button" onclick="login()" style="width:49.7%;color: white">Login</button>
+                <button type="button" onclick="document.getElementById('log').style.display='none'" style="width:49.7%;color: silver">Cancel</button>
+                <p id="pError" style="display: none" >Unfortunately there was a problem with the Username/Password, please try again...</p>
             </div>
 
             <div class="container" style="background-color:#f1f1f1">
-                <span class="psw">Forgot <a href="#">password?</a></span>
+                <span class="psw"></span>
             </div>
         </form>
     </div>
@@ -121,6 +123,7 @@
 </div>
 
     <script>
+        var ws;
         function nav_open() {
         var x = document.getElementById("mySidebar");
         x.style.width = "359px";
@@ -137,36 +140,141 @@
             document.getElementById("main").style.marginLeft = "0";
             document.getElementById("main").classList.toggle("blurmain");
         }
-        var modal = document.getElementById();
+        //var modal = document.getElementById();
 
         // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
+        //window.onclick = function(event) {
+        //    if (event.target = modal1,modal2) {
+        //        modal1.style.display = "none";
+        //        modal2.style.display = "none";
+        //
+        //          }
+        //    }
+        //}
+
+        function register(){
+        var x=document.getElementById("uName");
+        var y=document.getElementById("psw");
+        var z=document.getElementById("pswrpt");
+        var rError=document.getElementById("rError");
+        var uVal=(x.value);
+        var pVal=(y.value);
+        var pMVal=(z.value);
+            if (pVal==pMVal) {
+                initSession(); // Call to init the session
+                ws.send("register[`"+uVal+";`"+sessionStorage.sessID+";`"+pVal+"]"); //TODO Use Session Version
+                ws.onmessage=function(e){a=e.data;};
+                if ((a.trim(1))=="`UserBase"){
+                    modLog(uVal);
+                    // call Login Func
+                } else {
+                    rError.style.display = "block";
+                    rError.style.color="red";
+                }
+            }
+
+        }
+
+        function initSession() {
+            // Save data to sessionStorage
+            sessionStorage.setItem('key', Math.random().toString(36).substring(7));
+            sessionStorage.sessID = sessionStorage.getItem('key')
+        }
+        // Default Login Behaviour
+        function modLog(nameVal) {
+            sessionStorage.sessName=nameVal;
+            var wStrap=document.getElementById("wStrap");
+            var wMsg=document.getElementById("wMsg");
+            var pError=document.getElementById("pError");
+            var lgOut=document.getElementById("lgOut");
+            var lgIn=document.getElementById("lgIn");
+            var sgUp=document.getElementById("sgUp");
+            document.getElementById("log").style.display="none";
+            document.getElementById("reg").style.display="none";
+            lgOut.style.display="inline";
+            lgOut.style.width='90px';
+            lgOut.style.display.fontWeight="900";
+            lgIn.style.display="none";
+            wStrap.style="display: inline";
+            wMsg.style="display: inline";
+            wMsg.style.color="white";
+            wStrap.style.color="limegreen";
+            wStrap.style.fontSize="25px";
+            wMsg.textContent="  Welcome "+nameVal;
+            sgUp.style.display="none";
+            pError.style.display="none";
+        }
+
+
+
+        // Session Determination
+        function chkLogin() {
+            if (sessionStorage.sessName != "undefined" && sessionStorage.sessName != undefined) {
+                modLog(sessionStorage.sessName)
+            } else {
+
+                //ws.send("chkLogin[`"+sessionStorage.sessID+"]");
+                //ws.onmessage=function(e){a=e.data;sessionStorage.sessName=(a.substring(1).trim(1));return sessionStorage.sessName};
+                //if (sessionStorage.sessName!="") {
+                //    modLog(sessionStorage.sessName)
+                //}
+                return false
             }
         }
-        function connect()
-        {if ("WebSocket" in window)
-        {var l = window.location;ws = new WebSocket("ws://" + (l.hostname ? l.hostname : "localhost") + ":" + (l.port ? l.port : "5959") + "/");
-            //ws.onopen=function(e){out.value="connected";}
-            //ws.onclose=function(e){out.value="disconnected";}
-            //ws.onmessage=function(e){out.value=e.data;}
-            //ws.onerror=function(e){out.value=e.data;}
-        }else alert("WebSockets not supported on your browser.");
+
+        // Forced Login Behaviour
+        function login() {
+            var pError=document.getElementById("pError");
+            var x=document.getElementById("uname1");
+            var y=document.getElementById("psw1");
+            var uVal=(x.value);
+            var pVal=(y.value);
+            ws.send ("login[`"+uVal+";`"+sessionStorage.sessID+";`"+pVal+"]");
+            ws.onmessage=function(e){a=e.data;sessionStorage.a = (a.substr(-10).trim(0))};
+            if (sessionStorage.a=="`UserBase") {
+                modLog(uVal);
+                sessionStorage.setItem('logName', uVal);
+            } else if (sessionStorage.a=="wordError") {
+                pError.style.display = "block";
+                pError.style.color="red";
+            } else {
+                return false;
+            }
+            sessionStorage.sessName = sessionStorage.getItem('logName');
+            sessionStorage.clear(a)
         }
-        function login()
-        {x=document.getElementById("uname");
-            v=x.value;
-            ws.send(v);
-            //out.value="sent "+v;
+
+        function logout() {
+            var wStrap=document.getElementById("wStrap");
+            var lgOut=document.getElementById("lgOut");
+            var lgIn=document.getElementById("lgIn");
+            var sgUp=document.getElementById("sgUp");
+            lgOut.style.display="none";
+            lgOut.style.width='90px';
+            lgOut.style.display.fontWeight="900";
+            lgIn.style.display="inline";
+            wStrap.style="display: none";
+            sgUp.style.display="inline";
+            sessionStorage.clear(sessName);
+        }
+
+        function connect(){
+                var l = window.location;
+                ws = new WebSocket("ws://localhost:5050/");
+                initSession(); // Call to init the session
+        }
 
 
-            return false;
-        }
+        window.onload=function(){
+            connect();
+            chkLogin()
+        };
 
 
 
     </script>
+
+
     <style>
     .blurmain {
     filter: blur(3px);

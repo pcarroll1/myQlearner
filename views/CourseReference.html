@@ -6,104 +6,255 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
-<body>
+<body bgcolor="#e6f2ff">
 
 
 <!-- Side Navigation -->
 <nav class="w3-sidebar w3-bar-block w3-card w3-animate-left w3-center" style="display:none" id="mySidebar">
     <h1 style="font-size: 1.5em">Menu</h1>
     <a href="OpeningPage" class="w3-bar-item w3-button">Home</a>
-    <a href="TestPage" class="w3-bar-item w3-button">Test</a>
-    <a href="#" class="w3-bar-item w3-button">LeaderBoard</a>
-    <a href="#" class="w3-bar-item w3-button">LogOut</a>
+    <a href="TestMenu" class="w3-bar-item w3-button">Test</a>
+    <a href="LeaderBoard" class="w3-bar-item w3-button">LeaderBoard</a>
+    <a onclick="logout()" class="w3-bar-item w3-button">LogOut</a>
     <button class="w3-bar-item w3-button" onclick="nav_close()">Close <i class="fa fa-remove"></i></button>
 </nav>
 
 <!-- Main Body to Allow for Blurring -->
 <div id="main">
-<!-- Header -->
-<header class="w3-container w3-theme w3-padding" id="myHeader">
-    <i onclick="nav_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i>
-    <div class="w3-center">
-        <h1 class="w3-xxxlarge w3-animate-bottom">Course Content</h1>
-        <div class="w3-padding-1">
-            <button class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey" onclick="document.getElementById('id01').style.display='block'" style="font-weight:900;">Login</button>
+    <!-- Header -->
+    <header class="w3-container w3-theme w3-padding" id="myHeader">
+        <i onclick="nav_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i>
+        <div class="fa fa-user fa-lrg" style="padding-left: 2%;font-size: 20px" id="wStrap"> <h4 id="wMsg" style="font-size: 16px;display: none"></h4></div>
+        <button id="sgUp" class="w3-btn w3-blue" onmouseover="document.getElementById('sgUp').style.color='green'" onclick="document.getElementById('reg').style.display='block'" style="width: 120px;font-weight:900;">Sign Up</button>
+        <div class="w3-center">
+            <h1 class="w3-xxxlarge w3-animate-bottom">Course Content</h1>
+            <div class="w3-padding-1">
+                <button id="lgIn" class="w3-btn w3-dark-grey w3-hover-light-grey" onclick="document.getElementById('log').style.display='block';connect()" style="width: 80px;font-weight:900">Log In</button>
+                <button id="lgOut" class="w3-btn w3-dark-grey w3-hover-light-grey" onclick="logout()" style="display: none" >Log Out</button>
+            </div>
         </div>
+    </header>
+
+
+    <!------------------------------------------- Register Modal ------------------------------------------>
+    <div id="reg" class="modal1" style="z-index: 2">
+        <span onclick="document.getElementById('reg').style.display='none'" class="close" title="Close Modal">×</span>
+        <form class="modal-content animate" action="/action_page.php">
+            <div class="container">
+                <label><b>Email</b></label>
+                <input type="text" placeholder="Enter Username" id="uName" required>
+
+                <label><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" id="psw" required>
+
+                <label><b>Repeat Password</b></label>
+                <input type="password" placeholder="Confirm Password" id="pswrpt" required>
+                <input type="checkbox" checked="checked">
+
+                <div class="clearfix">
+                    <button type="button" onclick="document.getElementById('reg').style.display='none'"
+                            class="cancelbtn">Cancel
+                    </button>
+                    <button type="button" onclick="register()" class="signupbtn">Sign Up</button>
+                    <p id="rError" style="display: none">There is already an account registered with that UserName</p>
+                </div>
+            </div>
+        </form>
     </div>
-</header>
+    <!-------------------------------------------- LOGIN MODAL -------------------------------------------->
+    <div id="log" class="modal2" style="z-index: 2">
 
-<div class="w3-container w3-grey">
-    <p>Welcome to your crash course for q/KDB+. Select the tabs on the left hand side to get Started.</p>
-</div>
+        <form class="modal-content animate" action="/action_page.php">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('log').style.display='none'" class="close" title="Close Modal">&times;</span>
+            </div>
 
+            <div class="container">
+                <label><b id="test1">UserName</b></label>
+                <input type="text" placeholder="Enter Username" id="uname1" required>
 
-<div class="w3-sidebar w3-bar-block w3-light-grey w3-card" style="width:160px;">
+                <label><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" id="psw1" required>
 
-    <a href="#" class="w3-bar-item w3-button" onclick="changeTitle('The Basics');populateTextarea('basicText')">The Basics</a>
+                <button type="button" onclick="login()" style="width:49.7%;" style="color: #4a8be8">Login</button>
+                <button type="button" onclick="document.getElementById('log').style.display='none'" style="width:49.7%;"
+                        style="color: #ccc">Cancel
+                </button>
+                <p id="pError" style="display: none">Unfortunately there was a problem with the Username/Password,
+                    please try again...</p>
+            </div>
 
-    <div class="w3-bar-item w3-button" onclick=myAccFunc("Acc1")>
-        Datatypes <i class="fa fa-caret-down"></i></div>
-    <div id="Acc1" class="w3-hide w3-white w3-card-4">
-        <a href="#" class="w3-bar-item w3-button" onclick="changeTitle('Atoms');populateTextarea('basicText2')">Atoms</a>
-        <a href="#" class="w3-bar-item w3-button">Lists</a>
-        <a href="#" class="w3-bar-item w3-button">Dictionaries</a>
-        <a href="#" class="w3-bar-item w3-button">Tables</a>
+            <div class="container" style="background-color:#f1f1f1">
+                <span class="psw"></a></span>
+            </div>
+        </form>
+    </div>
+    <!---------------------------------------------------------------------------------------------------->
+
+    <div class="w3-container w3-grey">
+        <p>Welcome to your crash course for q/KDB+. Select the tabs on the left hand side to get Started.</p>
     </div>
 
-    <div class="w3-bar-item w3-button" onclick=myAccFunc("Acc2")>
-        Functions <i class="fa fa-caret-down"></i></div>
-    <div id="Acc2" class="w3-hide w3-white w3-card-4">
-        <a href="#" class="w3-bar-item w3-button">Primitive Operators</a>
-        <a href="#" class="w3-bar-item w3-button">Projections</a>
-        <a href="#" class="w3-bar-item w3-button">Casting</a>
-        <a href="#" class="w3-bar-item w3-button">Lamdas and Debugging</a>
+
+    <div class="w3-sidebar w3-bar-block w3-light-grey w3-card" style="width:160px">
+
+        <a href="#" class="w3-bar-item w3-button" onclick=populateTextarea(BasicText)>The Basics</a>
+
+        <div class="w3-bar-item w3-button" onclick=myAccFunc("Acc1")>
+            Datatypes <i class="fa fa-caret-down"></i></div>
+        <div id="Acc1" class="w3-hide w3-white w3-card-4">
+            <a href="#" class="w3-bar-item w3-button" onclick=populateTextarea(AtomText)>Atoms</a>
+            <a href="#" class="w3-bar-item w3-button" onclick=populateTextarea(ListsText)>Lists</a>
+            <a href="#" class="w3-bar-item w3-button" onclick=populateTextarea(DictText)>Dictionaries</a>
+            <a href="#" class="w3-bar-item w3-button" onclick=populateTextarea(AtomText)>Tables</a>
+        </div>
+
+        <div class="w3-bar-item w3-button" onclick=myAccFunc("Acc2")>
+            Functions <i class="fa fa-caret-down"></i></div>
+        <div id="Acc2" class="w3-hide w3-white w3-card-4">
+            <a href="#" class="w3-bar-item w3-button">Primitive Operators</a>
+            <a href="#" class="w3-bar-item w3-button">Projections</a>
+            <a href="#" class="w3-bar-item w3-button">Casting</a>
+            <a href="#" class="w3-bar-item w3-button">Lamdas and Debugging</a>
+        </div>
+
+        <div class="w3-bar-item w3-button" onclick=myAccFunc("Acc3")>
+            Adverbs <i class="fa fa-caret-down"></i></div>
+        <div id="Acc3" class="w3-hide w3-white w3-card-4">
+            <a href="#" class="w3-bar-item w3-button">Each</a>
+            <a href="#" class="w3-bar-item w3-button">Each Both/Left/Right</a>
+            <a href="#" class="w3-bar-item w3-button">Each Prior</a>
+            <a href="#" class="w3-bar-item w3-button">Peach</a>
+        </div>
+
+        <div class="w3-bar-item w3-button" onclick=myAccFunc("Acc4")>
+            qSql <i class="fa fa-caret-down"></i></div>
+        <div id="Acc4" class="w3-hide w3-white w3-card-4">
+            <a href="#" class="w3-bar-item w3-button">Link</a>
+            <a href="#" class="w3-bar-item w3-button">Link</a>
+        </div>
+
+    </div>
+    <div class="scroll">
+        <div class="w3-container" id="BasicText" style="margin-left:160px;display: block;">
+            <h3>The Basics</h3>
+            <h4>The History of Q</h4>
+            <p>Arthur Whitney developed the q programming language and its database kdb+. Released by Kx Systems, Inc.
+                in 2003, the primary design objectives of q are expressiveness, speed and efficiency. In these, it is
+                beyond compare. The design trade-off is a terseness that can be disconcerting to programmers coming from
+                verbose traditional database programming environments – e.g., C++, Java, C# or Python – and a relational
+                DBMS. Whereas the q programming gods revel in programs resembling an ASCII core dump, this manual is for
+                the rest of us.</p>
+            <p>Q evolved from APL (A Programming Language), which was first invented as a mathematical notation by
+                Kenneth Iverson at Harvard University in the 1950s. APL was introduced in the 1960s by IBM as a vector
+                programming language, meaning that it processes a list of numbers in a single operation. It was
+                successful in finance and other industries that required heavy number crunching.</p>
+            <p>The mitochondrial DNA of q traces from APL to A to A+ and to k. All were well suited to performing
+                complex calculations quickly on vectors. What's new in q/kdb+ is that it processes large volumes of
+                time-series data very efficiently in the relational paradigm. Its syntax allows "select" expressions
+                that are similar to SQL 92, and its collection of built-in functions provides a complete and powerful
+                stored procedure language.</p>
+            <code style="margin-left:40%">q) "Hello World!"</code>
+        </div>
+        <div class="w3-container" id="AtomText" style="margin-left:160px;display:none;overflow: scroll">
+            <h3>Atoms</h3>
+            <p>All data is ultimately built from atoms. An atom is an irreducible value of a specific data type. The
+                basic data types in q correspond mostly to those of traditional programming languages with additional
+                date- and time-related types that facilitate time series. The tables below summarize the basic data
+                types, giving the corresponding types in SQL, Java and C#. Other data types, including enumerations and
+                functions, will be covered when they are discussed in later sections.</p>
+            <h4>long<i> Type: 7/j</i></h4>
+            <p>In q versions 3.0 and later, the basic integer type is a signed eight-byte integer, called long. A
+                literal is identified as a long by the fact that it contains only numeric digits, with an optional
+                leading minus sign, and no decimal point. It may also have an optional trailing type indicator j
+                indicating it is a long and not another integer type. Here is a typical long integer value.</p>
+            <h4>int<i> Type: 6/i</i></h4>
+            <p>The two smaller signed integer data types are short and int. The short type represents a two-byte signed
+                integer and requires the trailing type indicator .</p>
+            <h4>float<i> Type: 9/f</i></h4>
+            <p>The float type represents an IEEE standard eight-byte floating-point number, often called "double" in
+                traditional languages. A float can hold (at least) 15 decimal digits of precision. It is denoted by
+                optionally signed numeric digits with either a decimal point or an optional trailing type indicator f.
+                Observe that the console shortens the display of floats with no significant digits to the right of the
+                decimal</p>
+            <h4>real<i> Type: 8/3</i></h4>
+            <p>The real type represents a single-precision, four-byte floating-point number and is denoted by numeric
+                digits containing a decimal point and a trailing type indicator e. Be mindful that this type is called
+                'float' in some languages. A real can hold at least 6 decimal digits of precision.</p>
+            <h4>boolean<i> Type: 1/b</i></h4>
+            <p>The boolean type uses one byte to store a bit and is denoted by the bit value with the trailing type
+                indicator b. There are no keywords for 'true' or 'false', nor are there separate logical operators for
+                booleans.</p>
+            <h4>char<i> Type: 10/c</i></h4>
+            <p>A char holds an individual ASCII or 8-bit Unicode character that is stored in one byte. It corresponds to
+                a SQL CHAR. It is denoted by a single character enclosed in double quotes.</p>
+            <h4>symbol<i> Type: 11/s</i></h4>
+            <p>A symbol is akin to a SQL VARCHAR, in that it can hold an arbitrary number of characters, but is
+                different in that it is atomic. The char "q" and the symbol `kdb are both atomic entities. A symbol is
+                irreducible, meaning that the individual characters that comprise it are not directly accessible.</p>
+        </div>
+        <div class="w3-container" id="ListsText" style="margin-left:160px;display:none;">
+            <h3>Lists</h3>
+            <p>All data structures in q are ultimately built from lists: a dictionary is a pair of lists; a table is a
+                special dictionary; a keyed table is a pair of tables. Thus it is important to have a thorough grounding
+                in lists.</p>
+
+            <p>All lists are equal but some lists are more equal than others. These are the lists of atoms of homogenous
+                type, called simple lists – known in mathematics as vectors. They have optimum storage and performance
+                characteristics.</p>
+
+            <p>While q’s list operations are similar to those in other functional languages, lists are stored and
+                processed quite differently.</p>
+
+            <p>They are not stored as singly-linked lists under the covers. Simple lists occupy contiguous storage and
+                general lists are pointers in contiguous storage.</p>
+
+            <p>Appending items to the end rather than “cons”-ing to the front.
+                Efficient direct item access is available via indexing.
+                A general list can hold items of different type without resorting to a union (sum) type.It may be
+                instructive to think of q lists as dynamically allocated arrays.</p>
+
+            <code style="margin-left:30%">q)(1; 1.1; `1)</code><br>
+            <code style="margin-left:30%">q)(1;2;3)</code><br>
+            <code style="margin-left:30%">q)("a";"b";"c";"d")</code><br>
+            <code style="margin-left:30%">q)(`Life;`the;`Universe;`and;`Everything)</code><br>
+            <code style="margin-left:30%">q)(-10.0; 3.1415e; 1b; `abc; "z")</code><br>
+            <code style="margin-left:30%">q)((1; 2; 3); (4; 5))</code><br>
+            <code style="margin-left:30%">q)((1; 2; 3); (`1; "2"; 3); 4.4)</code><br>
+
+            <p>If you diligently entered each of these examples in your console, you have noticed that q does not always echo what you type. The initial and last three lists are general lists, meaning they are not homogenous atoms. This could mean atoms of mixed type, nested lists of uniform type, or atoms and nested lists of mixed type.</p>
+            <p>Items in a list are sequenced from left to right, providing an inherent order. The lists 1;2 and 2;1 are different. SQL is based on sets, which are inherently unordered. This distinction leads to some subtle differences between the semantics of queries on q tables versus the analogous SQL queries. The inherent ordering of lists makes large time series processing natural and fast in q, while it is cumbersome and slow in standard SQL due to the need to place things in order.</p>
+
+        </div>
+
+        <div class="w3-container" id="DictText" style="margin-left:160px;display:none;">
+            <h3>Dictionaries</h3>
+            <p>A dictionary, sometimes called an association, is a mapping defined by positional correspondence between a domain list of keys and a co-domain list of values. Dictionary creation uses the ! operator – read "bang" – in contrast with the syntactic form for lists. keys!values. All dictionaries have type 99h.Observe that the q console displays a dictionary as an I/O table.</p>
+
+            <p>Neither the keys nor values need be simple lists but the keys should conform else odd things will happen during operations.</p>
+
+            <p>A dictionary can be decomposed into its key and value lists using the primitives key and value. The common number of keys or values is returned by count.</p>
+
+            <p>Although q does not enforce uniqueness for keys (a historical accident) a dictionary does provide a unique output value for each input value. Indeed, only the first key occurrence is seen during lookup.</p>
+
+            <p>The order of the items in the key and value lists is significant, just as positional order is significant for lists. Although the I/O assignments and the associated mappings are equivalent regardless of order, differently ordered dictionaries are not identical.</p>
+
+            <code style="margin-left:40%">q)q)10 20 30!1.1 2.2 3.3</code><br>
+            <code style="margin-left:40%">10| 1.1</code><br>
+            <code style="margin-left:40%">20| 2.2</code><br>
+            <code style="margin-left:40%">30| 3.3</code><br>
+            <code style="margin-left:40%">q)(`Arthur`Dent; `Zaphod`Beeblebrox; `Ford`Prefect)! 100 42 150</code><br>
+            <code style="margin-left:40%">Arthur Dent      | 100</code><br>
+            <code style="margin-left:40%">Zaphod Beeblebrox| 42</code><br>
+            <code style="margin-left:40%">Ford Prefect     | 150</code><br>
+
+        </div>
+
     </div>
 
-    <div class="w3-bar-item w3-button" onclick=myAccFunc("Acc3")>
-        Adverbs <i class="fa fa-caret-down"></i></div>
-    <div id="Acc3" class="w3-hide w3-white w3-card-4">
-        <a href="#" class="w3-bar-item w3-button">Each</a>
-        <a href="#" class="w3-bar-item w3-button">Each Both/Left/Right</a>
-        <a href="#" class="w3-bar-item w3-button">Each Prior</a>
-        <a href="#" class="w3-bar-item w3-button">Peach</a>
-    </div>
-
-    <div class="w3-bar-item w3-button" onclick=myAccFunc("Acc4")>
-        qSql <i class="fa fa-caret-down"></i></div>
-    <div id="Acc4" class="w3-hide w3-white w3-card-4">
-        <a href="#" class="w3-bar-item w3-button">Link</a>
-        <a href="#" class="w3-bar-item w3-button">Link</a>
-    </div>
-
-</div>
-
-<div class="w3-container" id="FullText" style="margin-left:160px">
-    <header id="sideBar">Sidebar Accordion</header>
-    <div class="w3-container" id="basicText" style="collapse: hidden">Lore Ileim</p>
-        <p>Here is some stuff in basic 1</p>
-        <code>Select from Trade where date=2017.05.01</code>
-    </div>
-    <div class="w3-container" id="basicText2" style="visibility: collapse">Lore Ileim</p>
-        <p>Here is some stuff in basic 2</p>
-        <code>hthd</code>
-    </div>
-</div>
 
     <script>
-        function nav_open() {
-            var x = document.getElementById("mySidebar");
-            x.style.width = "25%";
-            x.style.fontSize = "40px";
-            x.style.paddingTop = "10%";
-            x.style.display = "block";
-            x.style.color = "white";
-            x.style.backgroundColor = "#0099ff";
-            document.getElementById("main").classList.toggle("blurmain");
-        }
-        function nav_close() {
-            document.getElementById("mySidebar").style.display = "none";
-            document.getElementById("main").classList.toggle("blurmain");
-        }
+        var ws;
         function myAccFunc(id) {
             var x = document.getElementById(id);
             if (x.className.indexOf("w3-show") == -1) {
@@ -115,27 +266,175 @@
                     x.previousElementSibling.className.replace(" w3-green", "");
             }
         }
-        var basic = "Arthur Whitney developed the q programming language and its database kdb+. Released by Kx Systems, Inc. in 2003, the primary design objectives of q are expressiveness, speed and efficiency. In these, it is beyond compare. The design trade-off is a terseness that can be disconcerting to programmers coming from verbose traditional database programming environments – e.g., C++, Java, C# or Python – and a relational DBMS. Whereas the q programming gods revel in programs resembling an ASCII core dump, this manual is for the rest of us.";
-        var atom = "";
-        var list = "";
-        var dict = "";
-        var tbl = "";
-
-
-
         function populateTextarea(txt) {
-            document.getElementById(FullText).parentNode.removeChild(basicText);
-            document.getElementById(txt).style = "inline";
+            var basicText = document.getElementById("BasicText");
+            var atomText = document.getElementById("AtomText");
+            var ListsText = document.getElementById("ListsText");
+            var DictText = document.getElementById("DictText");
+            // Hide All divs
+            basicText.style.display = "none";
+            atomText.style.display = "none";
+            ListsText.style.display = "none";
+            DictText.style.display = "none";
+            // Show Selected Text
+            (txt).style.display = "block";
         }
-        function changeTitle(ttl) {
-            document.getElementById("sideBar").textContent = ttl;
+
+        function nav_open() {
+            var x = document.getElementById("mySidebar");
+            x.style.width = "359px";
+            x.style.fontSize = "40px";
+            x.style.paddingTop = "10%";
+            x.style.display = "block";
+            x.style.color = "white";
+            x.style.backgroundColor = "#0099ff";
+            document.getElementById("main").style.marginLeft = "359px";
+            document.getElementById("main").classList.toggle("blurmain");
         }
+        function nav_close() {
+            document.getElementById("mySidebar").style.display = "none";
+            document.getElementById("main").style.marginLeft = "0";
+            document.getElementById("main").classList.toggle("blurmain");
+        }
+        //var modal = document.getElementById();
+
+        // When the user clicks anywhere outside of the modal, close it
+        //window.onclick = function(event) {
+        //    if (event.target = modal1,modal2) {
+        //        modal1.style.display = "none";
+        //        modal2.style.display = "none";
+        //
+        //          }
+        //    }
+        //}
+
+        function register(){
+            var x=document.getElementById("uName");
+            var y=document.getElementById("psw");
+            var z=document.getElementById("pswrpt");
+            var rError=document.getElementById("rError");
+            var uVal=(x.value);
+            var pVal=(y.value);
+            var pMVal=(z.value);
+            if (pVal==pMVal) {
+                initSession(); // Call to init the session
+                ws.send("register[`"+uVal+";`"+sessionStorage.sessID+";`"+pVal+"]"); //TODO Use Session Version
+                ws.onmessage=function(e){a=e.data;};
+                if ((a.trim(1))=="`UserBase"){
+                    modLog(uVal);
+                    // call Login Func
+                } else {
+                    rError.style.display = "block";
+                    rError.style.color="red";
+                }
+            }
+
+        }
+
+        function initSession() {
+            // Save data to sessionStorage
+            sessionStorage.setItem('key', Math.random().toString(36).substring(7));
+            sessionStorage.sessID = sessionStorage.getItem('key')
+        }
+        // Default Login Behaviour
+        function modLog(nameVal) {
+            var wStrap=document.getElementById("wStrap");
+            var wMsg=document.getElementById("wMsg");
+            var pError=document.getElementById("pError");
+            var lgOut=document.getElementById("lgOut");
+            var lgIn=document.getElementById("lgIn");
+            var sgUp=document.getElementById("sgUp");
+            document.getElementById("log").style.display="none";
+            document.getElementById("reg").style.display="none";
+            lgOut.style.display="inline";
+            lgOut.style.width='90px';
+            lgOut.style.display.fontWeight="900";
+            lgIn.style.display="none";
+            wStrap.style="display: inline";
+            wMsg.style="display: inline";
+            wMsg.style.color="white";
+            wStrap.style.color="limegreen";
+            wStrap.style.fontSize="25px";
+            wMsg.textContent="  Welcome "+nameVal;
+            sgUp.style.display="none";
+            pError.style.display="none";
+        }
+
+
+
+        // Session Determination
+        function chkLogin() {
+            if (sessionStorage.sessName != "undefined" && sessionStorage.sessName != undefined) {
+                modLog(sessionStorage.sessName)
+            } else {
+
+                //ws.send("chkLogin[`"+sessionStorage.sessID+"]");
+                //ws.onmessage=function(e){a=e.data;sessionStorage.sessName=(a.substring(1).trim(1));return sessionStorage.sessName};
+                //if (sessionStorage.sessName!="") {
+                //    modLog(sessionStorage.sessName)
+                //}
+                return false
+            }
+        }
+
+        // Forced Login Behaviour
+        function login() {
+            var pError=document.getElementById("pError");
+            var x=document.getElementById("uname1");
+            var y=document.getElementById("psw1");
+            var uVal=(x.value);
+            var pVal=(y.value);
+            ws.send ("login[`"+uVal+";`"+sessionStorage.sessID+";`"+pVal+"]");
+            ws.onmessage=function(e){a=e.data;sessionStorage.a = (a.substr(-10).trim(0))};
+            if (sessionStorage.a=="`UserBase") {
+                modLog(uVal);
+                sessionStorage.setItem('logName', uVal);
+            } else if (sessionStorage.a=="wordError") {
+                pError.style.display = "block";
+                pError.style.color="red";
+            } else {
+                return false;
+            }
+            sessionStorage.sessName = sessionStorage.getItem('logName');
+            sessionStorage.clear(a)
+        }
+
+        function logout() {
+            var wStrap=document.getElementById("wStrap");
+            var lgOut=document.getElementById("lgOut");
+            var lgIn=document.getElementById("lgIn");
+            var sgUp=document.getElementById("sgUp");
+            lgOut.style.display="none";
+            lgOut.style.width='90px';
+            lgOut.style.display.fontWeight="900";
+            lgIn.style.display="inline";
+            wStrap.style="display: none";
+            sgUp.style.display="inline";
+            sessionStorage.clear(sessName);
+        }
+
+        function connect(){
+            var l = window.location;
+            ws = new WebSocket("ws://localhost:5050/");
+            initSession(); // Call to init the session
+        }
+
+
+        window.onload=function(){
+            connect();
+            chkLogin()
+        };
+
+
+
+
 
     </script>
     <style>
         .blurmain {
             filter: blur(5px);
         }
+
         .overflowTest {
             background: cornflowerblue;
             color: white;
@@ -145,5 +444,125 @@
             overflow: scroll;
             border: 1px solid #ccc;
         }
+
+        /* Full-width input fields */
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        /* Set a style for all buttons */
+        button {
+            background-color: #4a8be8;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        /* Extra styles for the cancel button */
+        .cancelbtn {
+            padding: 14px 20px;
+            background-color: #bdbdbf;
+        }
+
+        /* Float cancel and signup buttons and add an equal width */
+        .cancelbtn, .signupbtn {
+            float: left;
+            width: 50%
+        }
+
+        /* Add padding to container elements */
+        .container {
+            padding: 16px;
+        }
+
+        /* The Modal (background) */
+        .modal1 {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0); /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+            padding-top: 60px;
+        }
+
+        .modal2 {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0); /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+            padding-top: 60px;
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+        }
+
+        /* The Close Button (x) */
+        .close {
+            position: absolute;
+            right: 35px;
+            top: 15px;
+            color: #000;
+            font-size: 40px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: red;
+            cursor: pointer;
+        }
+
+        /* Clear floats */
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        /* Change styles for cancel button and signup button on extra small screens */
+        @media screen and (max-width: 300px) {
+            .cancelbtn, .signupbtn {
+                width: 100%;
+            }
+        }
+
+        @media only screen and (max-width: 620px) {
+            /* For mobile phones: */
+            .menu, .main, .right {
+                width: 100%;
+            }
+        }
+        div.scroll {
+            position: fixed;
+            background-color: #e6f2ff;
+            width: 100%;
+            height: 68%;
+            overflow: scroll;
+        }
+
     </style>
 </div>
