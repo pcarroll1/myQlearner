@@ -1,392 +1,156 @@
 <!DOCTYPE html>
-<html>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html style="height: 100%">
+<!--W3 Local Scripts-->
+<!--
+<script src="../public/javascripts/bootstrap.min.js"></script>
+<script src="../public/javascripts/jquery.min.js"></script>
+<link rel="stylesheet" href="../public/stylesheets/w3.css">
+<link rel="stylesheet" href="../public/stylesheets/w3-theme-blue.css">
+<link rel="stylesheet" href="../public/stylesheets/font-awesome.min.css">
+<link rel="stylesheet" href="../public/stylesheets/bootstrap.min.css">
+-->
+
+<!--<link rel="stylesheet" href="../public/stylesheets/style.css">
+<script src="../public/javascripts/myQlearner.js"></script> LOCAL VERSION -->
+
+<link rel="stylesheet" type="text/css" href="/stylesheets/style.css"/>
+<script src="/javascripts/myQlearner.js"></script>
+
 <title>my q Learner</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
-<body onload= chkLogin()>
 
 
 <!-- Side Navigation -->
 <nav class="w3-sidebar w3-bar-block w3-card w3-animate-left w3-center" style="display:none" id="mySidebar">
-	<h1 style="font-size: 1.5em">Menu</h1>
-	<a href="CourseReference" class="w3-bar-item w3-button">Learn</a>
-	<a href="TestMenu" class="w3-bar-item w3-button">Test</a>
-	<a href="LeaderBoard" class="w3-bar-item w3-button">LeaderBoard</a>
-    <a onclick="logout()" class="w3-bar-item w3-button">LogOut</a>
-    <button class="w3-bar-item w3-button" onclick="nav_close()">Close <i class="fa fa-remove"></i></button>
+    <h1 style="font-size: 1.5em">Menu</h1>
+    <a href="CourseReference" class="w3-bar-item w3-button">Learn</a>
+    <a href="TestMenu" class="w3-bar-item w3-button">Test</a>
+    <a href="LeaderBoard" class="w3-bar-item w3-button">LeaderBoard</a>
+    <button class="w3-bar-item w3-button" onclick="nav_close()">Close<i class="fa fa-remove"></i></button>
 </nav>
 
 
 <!-- Main Body to Allow for Blurring -->
-<div id="main">
-<!-- Header -->
-<header class="w3-container w3-theme w3-padding" id="myHeader">
-    <i onclick="nav_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i>
-    <button id="sgUp" class="w3-btn2 w3-blue" onclick="document.getElementById('reg').style.display='block'" style="width: 120px;font-weight:900;">Sign Up</button>
-    <div class="fa fa-user fa-lrg" style="padding-left: 10%;font-size: 30px;display: none" id="wStrap"> <h4 id="wMsg" style="font-size: 16px;"></h4></div>
-    <div class="w3-center">
-        <i class="fa fa-Quora w3-margin-bottom w3" style="font-size:100px"></i>
-        <h4>Welcome to </h4>
-        <div class="w3-padding-1">
-        <h1 class="w3-xxxlarge w3-animate-bottom">my q Learner</h1>
-            <button id="lgIn" class="w3-btn w3-dark-grey w3-hover-light-grey" onclick="document.getElementById('log').style.display='block';connect()" style="width: 80px;font-weight:900">Log In</button>
-        <button id="lgOut" class="w3-btn w3-dark-grey w3-hover-light-grey" onclick="logout()" style="display: none" >Log Out</button>
+<div id="main" style="position: relative">
+    <!-- Header -->
+    <header class="w3-container w3-theme w3-padding" id="myHeader" style="height: 25%">
+        <i onclick="nav_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i>
+        <div style="display: inline;float: right"> <!-- Sign in Elements-->
+            <b id="sgUp" onclick="document.getElementById('reg').style.display='block'"
+               onmouseover="document.getElementById('sgUp').style.color='limegreen'"
+               onmouseout="document.getElementById('sgUp').style.color='white'"
+               style="width: 120px;font-weight:900;">Sign Up</b>
+            <div class="fa fa-user fa-lrg"
+                 style="padding-left: 10%;font-size: 20px;display: none" id="wStrap">
+                <h4 id="wMsg" style="font-size: 10px;font-weight: bolder"></h4>
+            </div>
+            <b id="lgIn" onclick="document.getElementById('log').style.display='block'"
+               onmouseover="document.getElementById('lgIn').style.color='limegreen'"
+               onmouseout="document.getElementById('lgIn').style.color='white'"
+               style="width: 80px;font-weight:900">Log In</b>
+            <b id="lgOut" onclick="logout()" style="display: none"
+               onmouseover="document.getElementById('lgOut').style.color='limegreen'"
+               onmouseout="document.getElementById('lgOut').style.color='white'"
+            >Log Out</b>
         </div>
-        </div>
-</header>
 
-<!-- Register Modal -->
+        <div class="w3-center">
+            <h4>Welcome to </h4>
+            <div class="w3-padding-1"><h1 class="w3-xxxlarge w3-animate-bottom">my q Learner</h1></div>
+        </div>
+    </header>
+
+    <!-- Register Modal -->
     <div id="reg" class="modal1">
         <span onclick="document.getElementById('reg').style.display='none'" class="close" title="Close Modal">×</span>
         <form class="modal-content animate" action="/action_page.php">
             <div class="container">
                 <label><b>Email</b></label>
-                <input type="text" placeholder="Enter Username" id="uName" required>
+                <input type="text" placeholder="Enter Username" style="width: 99%" id="uName" required>
 
                 <label><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" id="psw" required>
+                <input type="password" placeholder="Enter Password" style="width: 99%" id="psw" required>
 
                 <label><b>Repeat Password</b></label>
-                <input type="password" placeholder="Confirm Password" id="pswrpt" required>
+                <input type="password" placeholder="Confirm Password" style="width: 99%" id="pswrpt" required>
 
                 <div class="clearfix">
+                    <button type="button" onclick="register()" class="signupbtn">SignUp</button>
                     <button type="button" onclick="document.getElementById('reg').style.display='none'" class="cancelbtn">Cancel</button>
-                    <button type="button" onclick="register()" class="signupbtn">Sign Up</button>
-                    <p id="rError" style="display: none" >There is already an account registered with that UserName</p>
+                    <p id="rError" style="display: none">There is already an account registered with that UserName</p>
                 </div>
             </div>
         </form>
     </div>
     <!-- LOGIN MODAL -->
     <div id="log" class="modal2">
-
+        <span onclick="document.getElementById('log').style.display='none'" class="close" title="Close Modal">×</span>
         <form class="modal-content animate" action="/action_page.php">
-            <div class="imgcontainer">
-                <span onclick="document.getElementById('log').style.display='none'" class="close" title="Close Modal">&times;</span>
-            </div>
-
-            <div class="container">
+            <div class="container" style="min-height: 17em">
                 <label><b id="test1">UserName</b></label>
-                <input type="text" placeholder="Enter Username" id="uname1" required>
+                <input type="text" placeholder="Enter Username" id="uname1" style="width: 98%" required>
 
                 <label><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" id="psw1" required>
-                <button type="button" onclick="login()" style="width:49.7%;color: white">Login</button>
-                <button type="button" onclick="document.getElementById('log').style.display='none'" style="width:49.7%;color: silver">Cancel</button>
-                <p id="pError" style="display: none" >Unfortunately there was a problem with the Username/Password, please try again...</p>
+                <input type="password" placeholder="Enter Password" id="psw1" style="width: 99%" required>
+                <button type="button" onclick="login()" class="signupbtn" style="width:49.7%;color: white">Login</button>
+                <button type="button" onclick="document.getElementById('log').style.display='none'"
+                        style="width:49%" class="cancelbtn">Cancel
+                </button>
+                <p id="pError" style="display: none">Unfortunately there was a problem with the Username/Password,
+                    please try again...</p>
             </div>
 
-            <div class="container" style="background-color:#f1f1f1">
                 <span class="psw"></span>
-            </div>
         </form>
     </div>
+    <div style="height: 100%">
+        <div class="w3-row-padding w3-center w3-margin-top w3-margin-bottom" style="height: 100%">
+            <div class="w3-third">
+                <div class="w3-card w3-container w3-hover-shadow" style="min-height: 460px" onclick=location.href='CourseReference'>
+                    <h3>Study</h3><br>
+                    <i class="fa fa-pencil w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+                    <p>Learn the fundamentals</p>
+                    <p>of q/kdb+ to achieve the</p>
+                    <p>status of q-God</p>
 
+                </div>
+            </div>
 
-<div class="w3-row-padding w3-center w3-margin-top">
-    <div class="w3-third">
-        <div class="w3-card w3-container w3-hover-shadow" style="min-height:460px">
-            <h3>Study</h3><br>
-            <i class="fa fa-pencil w3-margin-bottom w3-text-theme" style="font-size:120px" onclick=location.href="CourseReference"></i>
-            <p>Learn the fundamentals</p>
-            <p>of q/kdb+ to achieve the</p>
-            <p>status of q-God</p>
+            <div class="w3-third">
+                <div class="w3-card w3-container w3-hover-shadow" style="min-height: 460px" onclick=location.href='TestMenu'>
+                    <h3>Test</h3><br>
+                    <i class="fa fa-graduation-cap w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+                    <p>Think you are ready to</p>
+                    <p>test your q knowledge?</p>
+                    <p>Click here to try our</p>
+                    <p>interactive q tasks</p>
+                </div>
+            </div>
 
+            <div class="w3-third">
+                <div class="w3-card w3-container w3-hover-shadow" style="min-height:460px" onclick=location.href="LeaderBoard">
+                    <h3>Leaderboard</h3><br>
+                    <i class="fa fa-star w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+                    <p>Track your performance</p>
+                    <p>thus far and compare</p>
+                    <p>yourself to those</p>
+                    <p>around you learning q</p>
+                </div>
+            </div>
         </div>
-    </div>
-
-    <div class="w3-third">
-        <div class="w3-card w3-container w3-hover-shadow" style="min-height:460px">
-            <h3>Test</h3><br>
-            <i class="fa fa-graduation-cap w3-margin-bottom w3-text-theme" style="font-size:120px" onclick=location.href="TestMenu"></i>
-            <p>Think you are ready to</p>
-            <p>test your q knowledge?</p>
-            <p>Click here to try our</p>
-            <p>interactive q tasks</p>
-        </div>
-    </div>
-
-    <div class="w3-third">
-        <div class="w3-card w3-container w3-hover-shadow" style="min-height:460px">
-            <h3>Leaderboard</h3><br>
-            <i class="fa fa-star w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
-            <p>Track your performance</p>
-            <p>thus far and compare</p>
-            <p>yourself to those</p>
-            <p>around you learning q</p>
-        </div>
+        <footer id="foot" class="w3-container w3-theme"></footer>
     </div>
 </div>
-
-    <script>
-        var ws;
-        function nav_open() {
-        var x = document.getElementById("mySidebar");
-        x.style.width = "359px";
-        x.style.fontSize = "40px";
-        x.style.paddingTop = "10%";
-        x.style.display = "block";
-        x.style.color = "white";
-        x.style.backgroundColor = "#0099ff";
-        document.getElementById("main").style.marginLeft = "359px";
-        document.getElementById("main").classList.toggle("blurmain");
-    }
-        function nav_close() {
-            document.getElementById("mySidebar").style.display = "none";
-            document.getElementById("main").style.marginLeft = "0";
-            document.getElementById("main").classList.toggle("blurmain");
-        }
-        //var modal = document.getElementById();
-
-        // When the user clicks anywhere outside of the modal, close it
-        //window.onclick = function(event) {
-        //    if (event.target = modal1,modal2) {
-        //        modal1.style.display = "none";
-        //        modal2.style.display = "none";
-        //
-        //          }
-        //    }
-        //}
-
-        function register(){
-        var x=document.getElementById("uName");
-        var y=document.getElementById("psw");
-        var z=document.getElementById("pswrpt");
-        var rError=document.getElementById("rError");
-        var uVal=(x.value);
-        var pVal=(y.value);
-        var pMVal=(z.value);
-            if (pVal==pMVal) {
-                initSession(); // Call to init the session
-                ws.send("register[`"+uVal+";`"+sessionStorage.sessID+";`"+pVal+"]"); //TODO Use Session Version
-                ws.onmessage=function(e){a=e.data;};
-                if ((a.trim(1))=="`UserBase"){
-                    modLog(uVal);
-                    // call Login Func
-                } else {
-                    rError.style.display = "block";
-                    rError.style.color="red";
-                }
-            }
-
-        }
-
-        function initSession() {
-            // Save data to sessionStorage
-            sessionStorage.setItem('key', Math.random().toString(36).substring(7));
-            sessionStorage.sessID = sessionStorage.getItem('key')
-        }
-        // Default Login Behaviour
-        function modLog(nameVal) {
-            sessionStorage.sessName=nameVal;
-            var wStrap=document.getElementById("wStrap");
-            var wMsg=document.getElementById("wMsg");
-            var pError=document.getElementById("pError");
-            var lgOut=document.getElementById("lgOut");
-            var lgIn=document.getElementById("lgIn");
-            var sgUp=document.getElementById("sgUp");
-            document.getElementById("log").style.display="none";
-            document.getElementById("reg").style.display="none";
-            lgOut.style.display="inline";
-            lgOut.style.width='90px';
-            lgOut.style.display.fontWeight="900";
-            lgIn.style.display="none";
-            wStrap.style="display: inline";
-            wMsg.style="display: inline";
-            wMsg.style.color="white";
-            wStrap.style.color="limegreen";
-            wStrap.style.fontSize="25px";
-            wMsg.textContent="  Welcome "+nameVal;
-            sgUp.style.display="none";
-            pError.style.display="none";
-        }
-
-
-
-        // Session Determination
-        function chkLogin() {
-            if (sessionStorage.sessName != "undefined" && sessionStorage.sessName != undefined) {
-                modLog(sessionStorage.sessName)
-            } else {
-
-                //ws.send("chkLogin[`"+sessionStorage.sessID+"]");
-                //ws.onmessage=function(e){a=e.data;sessionStorage.sessName=(a.substring(1).trim(1));return sessionStorage.sessName};
-                //if (sessionStorage.sessName!="") {
-                //    modLog(sessionStorage.sessName)
-                //}
-                return false
-            }
-        }
-
-        // Forced Login Behaviour
-        function login() {
-            var pError=document.getElementById("pError");
-            var x=document.getElementById("uname1");
-            var y=document.getElementById("psw1");
-            var uVal=(x.value);
-            var pVal=(y.value);
-            ws.send ("login[`"+uVal+";`"+sessionStorage.sessID+";`"+pVal+"]");
-            ws.onmessage=function(e){a=e.data;sessionStorage.a = (a.substr(-10).trim(0))};
-            if (sessionStorage.a=="`UserBase") {
-                modLog(uVal);
-                sessionStorage.setItem('logName', uVal);
-            } else if (sessionStorage.a=="wordError") {
-                pError.style.display = "block";
-                pError.style.color="red";
-            } else {
-                return false;
-            }
-            sessionStorage.sessName = sessionStorage.getItem('logName');
-            sessionStorage.clear(a)
-        }
-
-        function logout() {
-            var wStrap=document.getElementById("wStrap");
-            var lgOut=document.getElementById("lgOut");
-            var lgIn=document.getElementById("lgIn");
-            var sgUp=document.getElementById("sgUp");
-            lgOut.style.display="none";
-            lgOut.style.width='90px';
-            lgOut.style.display.fontWeight="900";
-            lgIn.style.display="inline";
-            wStrap.style="display: none";
-            sgUp.style.display="inline";
-            sessionStorage.clear(sessName);
-        }
-
-        function connect(){
-                var l = window.location;
-                ws = new WebSocket("ws://localhost:5050/");
-                initSession(); // Call to init the session
-        }
-
-
-        window.onload=function(){
-            connect();
-            chkLogin()
-        };
-
-
-
-    </script>
-
-
-    <style>
-    .blurmain {
-    filter: blur(3px);
-    }
-    /* Full-width input fields */
-    input[type=text], input[type=password] {
-        width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        box-sizing: border-box;
-    }
-
-    /* Set a style for all buttons */
-    button {
-        background-color: #4a8be8;
-        color: white;
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        cursor: pointer;
-        width: 100%;
-    }
-
-    /* Extra styles for the cancel button */
-    .cancelbtn {
-        padding: 14px 20px;
-        background-color: #bdbdbf;
-    }
-
-    /* Float cancel and signup buttons and add an equal width */
-    .cancelbtn,.signupbtn {float:left;width:50%}
-
-    /* Add padding to container elements */
-    .container {
-        padding: 16px;
-    }
-
-    /* The Modal (background) */
-    .modal1 {
-        display: none; /* Hidden by default */
-        position: fixed; /* Stay in place */
-        z-index: 1; /* Sit on top */
-        left: 0;
-        top: 0;
-        width: 100%; /* Full width */
-        height: 100%; /* Full height */
-        overflow: auto; /* Enable scroll if needed */
-        background-color: rgb(0,0,0); /* Fallback color */
-        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        padding-top: 60px;
-    }
-    .modal2 {
-        display: none; /* Hidden by default */
-        position: fixed; /* Stay in place */
-        z-index: 1; /* Sit on top */
-        left: 0;
-        top: 0;
-        width: 100%; /* Full width */
-        height: 100%; /* Full height */
-        overflow: auto; /* Enable scroll if needed */
-        background-color: rgb(0,0,0); /* Fallback color */
-        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        padding-top: 60px;
-    }
-
-    /* Modal Content/Box */
-    .modal-content {
-        background-color: #fefefe;
-        margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-        border: 1px solid #888;
-        width: 80%; /* Could be more or less, depending on screen size */
-    }
-
-    /* The Close Button (x) */
-    .close {
-        position: absolute;
-        right: 35px;
-        top: 15px;
-        color: #000;
-        font-size: 40px;
-        font-weight: bold;
-    }
-
-    .close:hover,
-    .close:focus {
-        color: red;
-        cursor: pointer;
-    }
-
-    /* Clear floats */
-    .clearfix::after {
-        content: "";
-        clear: both;
-        display: table;
-    }
-
-    /* Change styles for cancel button and signup button on extra small screens */
-    @media screen and (max-width: 300px) {
-        .cancelbtn, .signupbtn {
-            width: 100%;
-        }
-    }
-
-    @media only screen and (max-width:620px) {
-        /* For mobile phones: */
-        .menu, .main, .right {
-            width:100%;
-        }
-    }
-
-    </style>
-
-</div>
+<!--<footer id="foot" class="w3-container w3-theme w3-padding" style="height: 100%;min-height: 7.7pc"></footer>-->
+</body>
+<script>
+    window.onload = function () {
+        connect();
+        chkLogin()
+    };
+</script>
+</html>

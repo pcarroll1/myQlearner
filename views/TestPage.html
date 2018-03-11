@@ -1,7 +1,23 @@
 <!DOCTYPE html>
 <html>
+<!--W3 Local Scripts-->
+<!--
+<script src="../public/javascripts/bootstrap.min.js"></script>
+<script src="../public/javascripts/jquery.min.js"></script>
+<link rel="stylesheet" href="../public/stylesheets/w3.css">
+<link rel="stylesheet" href="../public/stylesheets/w3-theme-blue.css">
+<link rel="stylesheet" href="../public/stylesheets/font-awesome.min.css">
+<link rel="stylesheet" href="../public/stylesheets/bootstrap.min.css">
+-->
 <title>Course Reference</title>
 <meta charset="UTF-8">
+
+<link rel="stylesheet" href="../public/stylesheets/style.css">
+<script src="../public/javascripts/myQlearner.js"></script> LOCAL VERSION -->
+
+<!--<link rel="stylesheet" type="text/css" href="/stylesheets/style.css"/>
+<script src="/javascripts/myQlearner.js"></script>-->
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
@@ -14,84 +30,164 @@
     <h1 style="font-size: 1.5em">Menu</h1>
     <a href="OpeningPage" class="w3-bar-item w3-button">Home</a>
     <a href="CourseReference" class="w3-bar-item w3-button">Learn</a>
-    <a href="#" class="w3-bar-item w3-button">LeaderBoard</a>
-    <a href="#" class="w3-bar-item w3-button">LogOut</a>
-    <button class="w3-bar-item w3-button" onclick="connect()">Close <i class="fa fa-remove"></i></button>
+    <a href="LeaderBoard" class="w3-bar-item w3-button">LeaderBoard</a>
+    <button class="w3-bar-item w3-button" onclick="nav_close()">Close <i class="fa fa-remove"></i></button>
 </nav>
 
 <!-- Main Body to Allow for Blurring -->
 <div id="main">
-    <!-- Modal -->
-    <div id="id01" class="w3-modal">
-        <div class="w3-modal-content w3-card-4 w3-animate-top">
-            <header class="w3-container w3-theme-l1">
-        <span onclick="document.getElementById('id01').style.display='none'"
-              class="w3-button w3-display-topright">×</span>
-                <h4>Click on any of the icons below to access the content</h4>
-                <h5>Or Click on the Side Navigation to visit a feature of the web site<i class="fa fa-smile-o"></i></h5>
-            </header>
-            <div class="w3-padding">
-                <p>Cool huh? Ok, enough teasing around..</p>
-                <p>Go to the <a class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey" href="http://code.kx.com/q/">KX
-                    Wiki</a> to learn more!</p>
-            </div>
-            <footer class="w3-container w3-theme-l1">
-                <p>Enjoy!</p>
-            </footer>
-        </div>
-    </div>
-
     <!-- Header -->
-    <header class="w3-container w3-theme w3-padding" id="myHeader">
+    <header class="w3-container w3-theme w3-padding" id="myHeader" style="height: 25%">
         <i onclick="nav_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i>
-        <div class="w3-center">
-            <h1 class="w3-xxxlarge w3-animate-bottom">Testing</h1>
-            <div class="w3-padding-1">
-                <button class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey"
-                        onclick="document.getElementById('id01').style.display='block'" style="font-weight:900;">Help
-                </button>
+        <div style="display: inline;float: right"> <!-- Sign in Elements-->
+            <b id="sgUp" onclick="document.getElementById('reg').style.display='block'"
+               onmouseover="document.getElementById('sgUp').style.color='limegreen'"
+               onmouseout="document.getElementById('sgUp').style.color='white'"
+               style="width: 120px;font-weight:900;">Sign Up</b>
+            <div class="fa fa-user fa-lrg"
+                 style="padding-left: 10%;font-size: 20px;display: none" id="wStrap">
+                <h4 id="wMsg" style="font-size: 10px;font-weight: bolder"></h4>
             </div>
+            <b id="lgIn" onclick="document.getElementById('log').style.display='block'"
+               onmouseover="document.getElementById('lgIn').style.color='limegreen'"
+               onmouseout="document.getElementById('lgIn').style.color='white'"
+               style="width: 80px;font-weight:900">Log In</b>
+            <b id="lgOut" onclick="logout()" style="display: none"
+               onmouseover="document.getElementById('lgOut').style.color='limegreen'"
+               onmouseout="document.getElementById('lgOut').style.color='white'"
+            >Log Out</b>
+        </div>
+
+        <div class="w3-center">
+            <div class="w3-padding-1"><h1 class="w3-xxxlarge w3-animate-bottom">Test</h1></div>
         </div>
     </header>
 
-    <div class="w3-container w3-grey">
-        <p id="tstTxt">Welcome to the Testing Environment for q/KDB+. Click</p>
-    </div>
+    <!-- Register Modal -->
+    <div id="reg" class="modal1">
+        <span onclick="document.getElementById('reg').style.display='none'" class="close" title="Close Modal">×</span>
+        <form class="modal-content animate" action="/action_page.php">
+            <div class="container">
+                <label><b>Email</b></label>
+                <input type="text" placeholder="Enter Username" style="width: 99%" id="uName" required>
 
-<div class="w3-row-padding">
+                <label><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" style="width: 99%" id="psw" required>
 
-    <div class="split left">
-        <div class="w3-card black" style="height: 80%">
-            <div class="w3-container w3-theme">
-                <h3>Input Environment</h3>
-            </div>
-            <div class="w3-container" style="height:3.8em;">
-                <input class="w3-input" type="text" id="x" placeholder="q)" style="background-color: lightskyblue;border: none;outline: none" height="100%">
-            </div>
-            <div class="w3-container w3-grey w3-large" style="position: relative;top: 65%"  ><button class="w3-btn w3-hover-green" style="margin-left: 90%" onclick="return send()"><div class="fa fa-play fa-lg"></div></button></div>
-        </div>
-    </div>
+                <label><b>Repeat Password</b></label>
+                <input type="password" placeholder="Confirm Password" style="width: 99%" id="pswrpt" required>
 
-    <div class="split right">
-        <div class="w3-card white" style="height: 80%">
-            <div class="w3-container w3-grey">
-                <h3>Output</h3>
-            </div>
-            <div>
-                    <textarea id="out" style="background-color: slategrey;outline: none;border: none;color: white;padding: 1%;margin-bottom: 1.3%" rows=16 cols="77"  ></textarea>
-                <div class="w3-container w3-grey w3-large" style="position: relative;top: 65%;height:44px">
-                    <button class="w3-btn w3-small w3-dark-grey w3-hover-light-grey" style="margin: .7%" onclick=connect()>Connect</button>
-                    <object class="led" id="Light" align="right"></object>
+                <div class="clearfix">
+                    <button type="button" onclick="register()" class="signupbtn">SignUp</button>
+                    <button type="button" onclick="document.getElementById('reg').style.display='none'" class="cancelbtn">Cancel</button>
+                    <p id="rError" style="display: none">There is already an account registered with that UserName</p>
                 </div>
+            </div>
+        </form>
+    </div>
+    <!-- LOGIN MODAL -->
+    <div id="log" class="modal2">
+        <span onclick="document.getElementById('log').style.display='none'" class="close" title="Close Modal">×</span>
+        <form class="modal-content animate" action="/action_page.php">
+            <div class="container" style="min-height: 17em">
+                <label><b id="test1">UserName</b></label>
+                <input type="text" placeholder="Enter Username" id="uname1" style="width: 98%" required>
 
+                <label><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" id="psw1" style="width: 99%" required>
+                <button type="button" onclick="login()" class="signupbtn" style="width:49.7%;color: white">Login</button>
+                <button type="button" onclick="document.getElementById('log').style.display='none'"
+                        style="width:49%" class="cancelbtn">Cancel
+                </button>
+                <p id="pError" style="display: none">Unfortunately there was a problem with the Username/Password,
+                    please try again...</p>
+            </div>
+
+            <span class="psw"></span>
+        </form>
+    </div>
+
+    <div class="w3-container" style="background-color: darkgrey;z-index: 0">
+        <p id="tstTxt" style="font-size:100%">Welcome to the Testing Environment for q/KDB+. Click</p>
+    </div>
+
+    <div class="w3-row-padding" style="height: 80%;z-index: 0">
+        <!-- LEFT INPUT AREA--->
+        <div class="split left">
+            <div class="w3-card black" style="height: 80%;z-index: 0">
+                <div class="w3-container w3-theme">
+                    <h3>Input Environment</h3>
+                </div>
+                <!--<input class="w3-input" type="text" id="x" placeholder="q)"
+                       style="background-color: lightskyblue;border: none;outline: none">-->
+                <textarea id="txtArea" rows=14 cols=42 placeholder="q)" style="font-size:130%;border-color: transparent;background-color: lightskyblue;padding: 2%;"></textarea>
+            </div>
+            <div class="w3-container w3-large" style="height: 10%;background-color: darkgrey">
+                <button class="w3-btn w3-theme w3-hover-green" style="margin-left:90%;height:90%;width: 10%;margin-top: .5%"
+                        onclick=send()><i class="fa fa-play fa-lg"></i></button>
             </div>
         </div>
+
+        <!-- RIGHT INPUT AREA--->
+        <div class="split right">
+            <div class="w3-card white" style="height: 80%;z-index: 0">
+                <div class="w3-container w3-grey">
+                    <h3>Output</h3>
+                </div>
+                <textarea id="out"
+                          style="font-size:130%;background-color: slategrey;outline: none;border: none;color: white;padding:2%"
+                          rows=14 cols="42"></textarea>
+                </div>
+            <div class="w3-container w3-large" style="height: 10%;background-color: darkgrey">
+                <button class="w3-btn w3-theme w3-hover-green" style="margin-left: 10%;height:90%;width: 40%;margin-top: .5%"
+                        onclick=connect()>Reconnect</button>
+                <button class="w3-btn w3-theme w3-hover-green" style="margin-left: 10%;height:90%;width: 25%;margin-top: .5%"
+                        onclick="document.getElementById('Hint').style.display='block'">Hint</button>
+                <object class="led" id="Light" align="right" style="height:30%;width:3%;margin-top: 3%"></object>
+            </div>
+
+            <!-- SUCCESS MODAL -->
+            <div id="Success" class="modal2" style="position: absolute;">
+                <form class="modal-content animate" action="/action_page.php">
+                    <div class="imgcontainer">
+                        <span onclick="document.getElementById('Success').style.display='none'" class="close" title="Close Modal">&times;</span>
+                    </div>
+                    <div class="container w3-green" style="background-color:blue">
+                        <h3>Congratulations</h3>
+                        <div id="sBody"></div>
+                    </div>
+                </form>
+            </div>
+            <!-- HINT MODAL -->
+            <div id="Hint" class="modal2" style="position: absolute;">
+                <form class="modal-content animate" action="/action_page.php">
+                    <div class="imgcontainer">
+                        <span onclick="document.getElementById('Hint').style.display='none'" class="close" title="Close Modal">&times;</span>
+                    </div>
+                    <div class="container w3-blue">
+                        <h3>Hint</h3>
+                        <div id="hBody"></div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
     </div>
-</div>
+    <div class="w3-container" style="background-color: darkgrey"></div>
 
     <script>
-        var ws,out=document.getElementById("out");
-
+        var textareas = document.getElementsByTagName('textarea');
+        var count = textareas.length;
+        for(var i=0;i<count;i++){
+            textareas[i].onkeydown = function(e){
+                if(e.keyCode==9 || e.which==9){
+                    e.preventDefault();
+                    var s = this.selectionStart;
+                    this.value = this.value.substring(0,this.selectionStart) + "\t" + this.value.substring(this.selectionEnd);
+                    this.selectionEnd = s+1;
+                }
+            }
+        }
         function connect()
         {if ("WebSocket" in window)
         {var l = window.location;ws = new WebSocket("ws://localhost:5050/");
@@ -103,14 +199,39 @@
         }else alert("WebSockets not supported on your browser.");
         }
 
-        function send()
-        {x=document.getElementById("x");
-            v=x.value;
+        function send() {
+            out.value="sending..."
+            var x=document.getElementById("txtArea");
+            var v=x.value;
             ws.send(v);
-            out.value="Ooops! We encountered a problem, press connect to reconnect to the Server!";
+            ws.onmessage=function(e){
+                a = e.data;
+                try {
+                    if (eval(a) == "fT:1") {
+                        chkTest(a)
+                    } else {
+                        out.value = a;
+                    }
 
-
+                }
+                catch(err) {
+                    //console.info(err.message);
+                }
+                out.value = a;
+            };
+            //out.value="Ooops! We encountered a problem, press connect to reconnect to the Server!"
             return false;
+        };
+
+        function chkTest(value) {
+            var test1 = "This task, although simple can teach about setting parameters in a function, either implicitly i.e. add:{x+y} or explicitly add:{[a;b]a+b}";
+            var test2 = "Lists: Write a function that given a list, can output a dictionary of the distinct elements in that list";
+            var test3 = "Dictionaries: Write a function that given two arguments [x;y] can create a dictionary of these arguments (x being the key and y being the value)";
+            var test4 = "Tables: Write a function that given a dictionary (`name`age!(`Tim;18)) can turn this into a table";
+                document.getElementById("Success").style.display = "block";
+                var body = document.getElementById("sBody");
+                body.textContent = eval(sessionStorage.testItem);
+                ws.send("testPass[`"+sessionStorage.sessName+";`"+sessionStorage.testItem+"]");
         }
 
         function nav_open() {
@@ -138,60 +259,39 @@
                     x.style.backgroundColor = "#C7312E";
                     x.style.boxShadow = "#000000 0 -1px 7px 1px, inset #861811 0 -1px 9px, #cb3338 0 2px 12px"
                 }
-            }
+            };
+
         function setTest() {
-            var test1 = "Atoms: Write a function that given an atom x, can multiply this by 5";
-            var test2 = "Lists: Write a function that given a list, can output a dictionary of the distinct elements in that list";
-            var test3 = "Dictionaries: Write a function that given two arguments [x;y] can create a dictionary of these arguments (x being the key and y being the value)";
-            var test4 = "Tables: Write a function that given a dictionary (`name`age!(`Tim;18)) can turn this into a table";
+            var test1 = "Atoms: Write a function 'add', that given two parameters can add these together. The Function should take the form of 'add:{...code...}'";
+            var test2 = "Lists: Write a function 'listCount', that given a list, can output a dictionary of the distinct elements in that list. The Function should take the form of 'listCount:{...code...}'";
+            var test3 = "Dictionaries: Write a function 'dictMaker', that given two arguments [x;y] can create a dictionary of these arguments (x being the key and y being the value). The Function should take the form of 'dictMaker:{...code...}'";
+            var test4 = "Tables: Write a function 'dictToTable', that given a dictionary (`name`age!(`Tim;18)) can turn this into a table. The Function should take the form of 'dictToTable:{...code...}'";
             var s = document.getElementById("tstTxt");
             s.textContent = eval(sessionStorage.testItem);
-        }
-            window.onload = function() {
+        };
+
+        function setHint() {
+            var test1 = "Maybe you should check out implicit variables and arithmetic operators";
+            var test2 = "Here's a good time to examine some of Q's native functions and adverbs";
+            var test3 = "Dictionaries are created by banging two lists together (list)!list";
+            var test4 = "Tables in Q are flipped dictionaries, where the key is the column header and the value is the column data";
+            var s = document.getElementById("hBody");
+            s.textContent = eval(sessionStorage.testItem);
+        };
+
+        window.onload = function() {
             connect();
+            chkLogin();
             setTest();
-        }
+            setHint();
+        };
+
+
 
     </script>
-    <style>
-        .blurmain {
-            filter: blur(5px);
-        }
-        .led {
-            width: 16px;
-            alignment: right;
-            margin-top: 1em;
-            height: 16px;
-            border-radius: 50%;
-            background-color: #888888;
-            box-shadow: #000000 0 -1px 7px 1px, inset #bcb6b6 0 -1px 9px, #cbc2ca 0 2px 12px;
-        }
-
-        /* Split the screen in half */
-        .split {
-            height: 80%;
-            width: 50%;
-            position: fixed;
-            z-index: 1;
-            /*top: 0; */
-            overflow-x: hidden;
-            padding-top: 20px;
-        }
-
-        /* Control the left side */
-        .left {
-            left: 0;
-            background-color: lightskyblue;
-        }
-
-        /* Control the right side */
-        .right {
-            right: 0;
-            background-color: slategrey;
-        }
-
-    </style>
 
 
 
 </div>
+</body>
+</html>

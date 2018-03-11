@@ -1,7 +1,21 @@
 <!DOCTYPE html>
 <html>
-<head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></head>
-<title>Test Menu</title>
+<!--W3 Local Scripts-->
+<!--
+<script src="../public/javascripts/bootstrap.min.js"></script>
+<script src="../public/javascripts/jquery.min.js"></script>
+<link rel="stylesheet" href="../public/stylesheets/w3.css">
+<link rel="stylesheet" href="../public/stylesheets/w3-theme-blue.css">
+<link rel="stylesheet" href="../public/stylesheets/font-awesome.min.css">
+<link rel="stylesheet" href="../public/stylesheets/bootstrap.min.css">
+-->
+
+<link rel="stylesheet" href="../public/stylesheets/style.css"> <!-- LOCAL VERSION -->
+<script src="../public/javascripts/myQlearner.js"></script> <!-- LOCAL VERSION -->
+
+<!--<link rel="stylesheet" type="text/css" href="/stylesheets/style.css"/> <!-- APP VERSION -->
+<!--<script src="/javascripts/myQlearner.js"></script> <!-- APP VERSION -->
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -16,275 +30,146 @@
     <a href="OpeningPage" class="w3-bar-item w3-button">Home</a>
     <a href="CourseReference" class="w3-bar-item w3-button">Learn</a>
     <a href="#" class="w3-bar-item w3-button">LeaderBoard</a>
-    <a href="#" class="w3-bar-item w3-button">LogOut</a>
     <button class="w3-bar-item w3-button" onclick="nav_close()">Close <i class="fa fa-remove"></i></button>
 </nav>
 
 <!-- Main Body to Allow for Blurring -->
 <div id="main">
-    <!-- Modal -->
-    <div id="id01" class="w3-modal">
-        <div class="w3-modal-content w3-card-4 w3-animate-top">
-            <header class="w3-container w3-theme-l1">
-        <span onclick="document.getElementById('id01').style.display='none'"
-              class="w3-button w3-display-topright">×</span>
-                <h4>Click on any of the icons below to access the content</h4>
-                <h5>Or Click on the Side Navigation to visit a feature of the web site<i class="fa fa-smile-o"></i></h5>
-            </header>
-            <div class="w3-padding">
-                <p>Cool huh? Ok, enough teasing around..</p>
-                <p>Go to the <a class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey" href="http://code.kx.com/q/">KX
-                    Wiki</a> to learn more!</p>
+        <!-- Header -->
+        <header class="w3-container w3-theme w3-padding" id="myHeader">
+            <i onclick="nav_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i>
+            <div style="display: inline;float: right"> <!-- Sign in Elements-->
+                <b id="sgUp" onclick="document.getElementById('reg').style.display='block'"
+                   onmouseover="document.getElementById('sgUp').style.color='limegreen'"
+                   onmouseout="document.getElementById('sgUp').style.color='white'"
+                   style="width: 120px;font-weight:900;">Sign Up</b>
+                <div class="fa fa-user fa-lrg"
+                     style="padding-left: 10%;font-size: 20px;display: none" id="wStrap">
+                    <h4 id="wMsg" style="font-size: 10px;font-weight: bolder"></h4>
+                </div>
+                <b id="lgIn" onclick="document.getElementById('log').style.display='block'"
+                   onmouseover="document.getElementById('lgIn').style.color='limegreen'"
+                   onmouseout="document.getElementById('lgIn').style.color='white'"
+                   style="width: 80px;font-weight:900">Log In</b>
+                <b id="lgOut" onclick="logout()" style="display: none"
+                   onmouseover="document.getElementById('lgOut').style.color='limegreen'"
+                   onmouseout="document.getElementById('lgOut').style.color='white'"
+                >Log Out</b>
             </div>
-            <footer class="w3-container w3-theme-l1">
-                <p>Enjoy!</p>
-            </footer>
-        </div>
-    </div>
-
-    <!-- Header -->
-    <header class="w3-container w3-theme w3-padding" id="myHeader">
-        <i onclick="nav_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i>
-        <div class="w3-center">
-            <h1 class="w3-xxxlarge w3-animate-bottom">Testing Menu</h1>
-            <div class="w3-padding-1">
-                <button class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey"
-                        onclick="document.getElementById('id01').style.display='block'" style="font-weight:900;">Help
-                </button>
+            <div class="w3-center">
+                <div class="w3-padding-1"><h1 class="w3-xxxlarge w3-animate-bottom">Testing Menu</h1></div>
             </div>
-        </div>
     </header>
+
+    <!-- Register Modal -->
+    <div id="reg" class="modal1">
+        <span onclick="document.getElementById('reg').style.display='none'" class="close" title="Close Modal">×</span>
+        <form class="modal-content animate" action="/action_page.php">
+            <div class="container">
+                <label><b>Email</b></label>
+                <input type="text" placeholder="Enter Username" style="width: 99%" id="uName" required>
+
+                <label><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" style="width: 99%" id="psw" required>
+
+                <label><b>Repeat Password</b></label>
+                <input type="password" placeholder="Confirm Password" style="width: 99%" id="pswrpt" required>
+
+                <div class="clearfix">
+                    <button type="button" onclick="register()" class="signupbtn">SignUp</button>
+                    <button type="button" onclick="document.getElementById('reg').style.display='none'" class="cancelbtn">Cancel</button>
+                    <p id="rError" style="display: none">There is already an account registered with that UserName</p>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- LOGIN MODAL -->
+    <div id="log" class="modal2">
+        <span onclick="document.getElementById('log').style.display='none'" class="close" title="Close Modal">×</span>
+        <form class="modal-content animate" action="/action_page.php">
+            <div class="container" style="min-height: 17em">
+                <label><b id="test1">UserName</b></label>
+                <input type="text" placeholder="Enter Username" id="uname1" style="width: 98%" required>
+
+                <label><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" id="psw1" style="width: 99%" required>
+                <button type="button" onclick="login()" class="signupbtn" style="width:49.7%;color: white">Login</button>
+                <button type="button" onclick="document.getElementById('log').style.display='none'"
+                        style="width:49%" class="cancelbtn">Cancel
+                </button>
+                <p id="pError" style="display: none">Unfortunately there was a problem with the Username/Password,
+                    please try again...</p>
+            </div>
+
+            <span class="psw"></span>
+        </form>
+    </div>
 
     <div class="w3-container w3-grey">
         <p>Welcome to the Testing Environment for q/KDB+. Click a challenge that you would like to complete access the q Server</p>
     </div>
     <header class="w3-large w3-dark-grey">DataTypes</header>
     <div class="grid-container">
-        <button class="w3-btn w3-light-grey w3-hover-blue" onclick=location.href="TestPage";sessionStorage.testItem="test1"><h3>Atoms<div class="fa fa-stop-circle-o fa-lg" style="padding-left: 10%" ></div></h3></button>
-        <button class="w3-btn w3-light-grey w3-hover-blue" onclick=location.href="TestPage";sessionStorage.testItem="test2"><h3>Lists<div class="fa fa-list fa-lg" style="padding-left: 10%"></div></h3></button>
-        <button class="w3-btn w3-light-grey w3-hover-blue" onclick=location.href="TestPage";sessionStorage.testItem="test3"><h3>Dictionaries<div class="fa fa-book fa-lg" style="padding-left: 10%"></div></h3></button>
-        <button class="w3-btn w3-light-grey w3-hover-blue"><h3>Tables<div class="fa fa-table fa-lg" style="padding-left: 10%"></div></h3></button>
+        <button id="s1t1" class="w3-btn w3-hover-blue" onclick=location.href="TestPage";sessionStorage.testItem="test1"><h3>Atoms<div class="fa fa-stop-circle-o fa-lg" style="padding-left: 10%" ></div></h3></button>
+        <button id="s1t2" class="w3-btn w3-hover-blue" onclick=location.href="TestPage";sessionStorage.testItem="test2"><h3>Lists<div class="fa fa-list fa-lg" style="padding-left: 10%"></div></h3></button>
+        <button id="s1t3" class="w3-btn w3-hover-blue" onclick=location.href="TestPage";sessionStorage.testItem="test3"><h3>Dictionaries<div class="fa fa-book fa-lg" style="padding-left: 10%"></div></h3></button>
+        <button id="s1t4" class="w3-btn w3-hover-blue"><h3>Tables<div class="fa fa-table fa-lg" style="padding-left: 10%"></div></h3></button>
 </div>
     <header class="w3-large w3-dark-grey">Functions</header>
     <div class="grid-container">
-        <button class="w3-btn w3-light-grey w3-hover-blue"><h3>Operators<div class="fa fa-wrench fa-lg" style="padding-left: 10%"></div></h3></button>
-        <button class="w3-btn w3-light-grey w3-hover-blue"><h3>Lambdas<div class="fa fa-file-code-o fa-lg" style="padding-left: 10%"></div></h3></button>
-        <button class="w3-btn w3-light-grey w3-hover-blue"><h3>Casting<div class="fa fa-shield fa-lg" style="padding-left: 10%"></div></h3></button>
-        <button class="w3-btn w3-light-grey w3-hover-blue"><h3>Projections<div class="fa fa-magic fa-lg" style="padding-left: 10%"></div></h3></button>
+        <button class="w3-btn w3-hover-blue"><h3>Operators<div class="fa fa-wrench fa-lg" style="padding-left: 10%"></div></h3></button>
+        <button class="w3-btn w3-hover-blue"><h3>Lambdas<div class="fa fa-file-code-o fa-lg" style="padding-left: 10%"></div></h3></button>
+        <button class="w3-btn w3-hover-blue"><h3>Casting<div class="fa fa-shield fa-lg" style="padding-left: 10%"></div></h3></button>
+        <button class="w3-btn w3-hover-blue"><h3>Projections<div class="fa fa-magic fa-lg" style="padding-left: 10%"></div></h3></button>
     </div>
     <header class="w3-large w3-dark-grey">More Coming Soon...</header>
-    <div class="grid-container">
+    <div class="grid-container" style="padding:11%;">
     </div>
 
     <div class="w3-row-padding">
 
     </div>
-
-    <script>
-        var ws;
-        function myAccFunc(id) {
-            var x = document.getElementById(id);
-            if (x.className.indexOf("w3-show") == -1) {
-                x.className += " w3-show";
-                x.previousElementSibling.className += " w3-green";
-            } else {
-                x.className = x.className.replace(" w3-show", "");
-                x.previousElementSibling.className =
-                    x.previousElementSibling.className.replace(" w3-green", "");
-            }
-        }
-        function populateTextarea(txt) {
-            var basicText = document.getElementById("BasicText");
-            var atomText = document.getElementById("AtomText");
-            var ListsText = document.getElementById("ListsText");
-            var DictText = document.getElementById("DictText");
-            // Hide All divs
-            basicText.style.display = "none";
-            atomText.style.display = "none";
-            ListsText.style.display = "none";
-            DictText.style.display = "none";
-            // Show Selected Text
-            (txt).style.display = "block";
-        }
-
-        function nav_open() {
-            var x = document.getElementById("mySidebar");
-            x.style.width = "359px";
-            x.style.fontSize = "40px";
-            x.style.paddingTop = "10%";
-            x.style.display = "block";
-            x.style.color = "white";
-            x.style.backgroundColor = "#0099ff";
-            document.getElementById("main").style.marginLeft = "359px";
-            document.getElementById("main").classList.toggle("blurmain");
-        }
-        function nav_close() {
-            document.getElementById("mySidebar").style.display = "none";
-            document.getElementById("main").style.marginLeft = "0";
-            document.getElementById("main").classList.toggle("blurmain");
-        }
-        //var modal = document.getElementById();
-
-        // When the user clicks anywhere outside of the modal, close it
-        //window.onclick = function(event) {
-        //    if (event.target = modal1,modal2) {
-        //        modal1.style.display = "none";
-        //        modal2.style.display = "none";
-        //
-        //          }
-        //    }
-        //}
-
-        function register(){
-            var x=document.getElementById("uName");
-            var y=document.getElementById("psw");
-            var z=document.getElementById("pswrpt");
-            var rError=document.getElementById("rError");
-            var uVal=(x.value);
-            var pVal=(y.value);
-            var pMVal=(z.value);
-            if (pVal==pMVal) {
-                initSession(); // Call to init the session
-                ws.send("register[`"+uVal+";`"+sessionStorage.sessID+";`"+pVal+"]"); //TODO Use Session Version
-                ws.onmessage=function(e){a=e.data;};
-                if ((a.trim(1))=="`UserBase"){
-                    modLog(uVal);
-                    // call Login Func
-                } else {
-                    rError.style.display = "block";
-                    rError.style.color="red";
-                }
-            }
-
-        }
-
-        function initSession() {
-            // Save data to sessionStorage
-            sessionStorage.setItem('key', Math.random().toString(36).substring(7));
-            sessionStorage.sessID = sessionStorage.getItem('key')
-        }
-        // Default Login Behaviour
-        function modLog(nameVal) {
-            sessionStorage.sessName=nameVal;
-            var wStrap=document.getElementById("wStrap");
-            var wMsg=document.getElementById("wMsg");
-            var pError=document.getElementById("pError");
-            var lgOut=document.getElementById("lgOut");
-            var lgIn=document.getElementById("lgIn");
-            var sgUp=document.getElementById("sgUp");
-            document.getElementById("log").style.display="none";
-            document.getElementById("reg").style.display="none";
-            lgOut.style.display="inline";
-            lgOut.style.width='90px';
-            lgOut.style.display.fontWeight="900";
-            lgIn.style.display="none";
-            wStrap.style="display: inline";
-            wMsg.style="display: inline";
-            wMsg.style.color="white";
-            wStrap.style.color="limegreen";
-            wStrap.style.fontSize="25px";
-            wMsg.textContent="  Welcome "+nameVal;
-            sgUp.style.display="none";
-            pError.style.display="none";
-        }
-
-
-
-        // Session Determination
-        function chkLogin() {
-            if (sessionStorage.sessName != "undefined" && sessionStorage.sessName != undefined) {
-                modLog(sessionStorage.sessName)
-            } else {
-
-                //ws.send("chkLogin[`"+sessionStorage.sessID+"]");
-                //ws.onmessage=function(e){a=e.data;sessionStorage.sessName=(a.substring(1).trim(1));return sessionStorage.sessName};
-                //if (sessionStorage.sessName!="") {
-                //    modLog(sessionStorage.sessName)
-                //}
-                return false
-            }
-        }
-
-        // Forced Login Behaviour
-        function login() {
-            var pError=document.getElementById("pError");
-            var x=document.getElementById("uname1");
-            var y=document.getElementById("psw1");
-            var uVal=(x.value);
-            var pVal=(y.value);
-            ws.send ("login[`"+uVal+";`"+sessionStorage.sessID+";`"+pVal+"]");
-            ws.onmessage=function(e){a=e.data;sessionStorage.a = (a.substr(-10).trim(0))};
-            if (sessionStorage.a=="`UserBase") {
-                modLog(uVal);
-                sessionStorage.setItem('logName', uVal);
-            } else if (sessionStorage.a=="wordError") {
-                pError.style.display = "block";
-                pError.style.color="red";
-            } else {
-                return false;
-            }
-            sessionStorage.sessName = sessionStorage.getItem('logName');
-            sessionStorage.clear(a)
-        }
-
-        function logout() {
-            var wStrap=document.getElementById("wStrap");
-            var lgOut=document.getElementById("lgOut");
-            var lgIn=document.getElementById("lgIn");
-            var sgUp=document.getElementById("sgUp");
-            lgOut.style.display="none";
-            lgOut.style.width='90px';
-            lgOut.style.display.fontWeight="900";
-            lgIn.style.display="inline";
-            wStrap.style="display: none";
-            sgUp.style.display="inline";
-            sessionStorage.clear(sessName);
-        }
-
-        function connect(){
-            if (sessionStorage.sessID != "undefined" && sessionStorage.sessID != undefined) {
-                return true;
-            } else {
-                var l = window.location;
-                ws = new WebSocket("ws://localhost:5050/");
-                initSession(); // Call to init the session
-            }
-        }
-
-
-        window.onload=function(){
-            connect();
-            chkLogin()
-        };
-
-
-
-        function connLight() {
-            document.getElementsByName("Light").classList.toggle("blurmain");
-        }
-
-    </script>
-    <style>
-        .blurmain {
-            filter: blur(5px);
-        }
-        .grid-container {
-            display: grid;
-            height: auto;
-            align-content: center;
-            grid-template-columns: auto auto auto auto;
-            grid-gap: 10px;
-            background-color: #cac1ce;
-            padding: 10px;
-        }
-        .grid-container > button {
-            background-color: rgba(255, 255, 255, 0.8);
-            text-align: center;
-            padding: 20px 0;
-            font-size: 25px;
-        }
-    </style>
-
-
-
 </div>
+</body>
+<script>
+    function adjust(x){var test = document.getElementById(x);
+        test.style.backgroundColor = "lightgreen"}
+    function clear(x){var ot = document.getElementById(x);
+        ot.style.backgroundColor = "#f2f2f2"}
+
+    function showPass(tests){
+        var x;
+        x = eval(eval(tests));
+        for (var i = 0; i < x.length; ++i) adjust(x[i])
+    }
+    function clearPass(){
+        var x = ['s1t1','s1t2','s1t3','s1t4'];
+        for (var i = 0; i < x.length; ++i) clear(x[i])
+    }
+
+    function showPassed(){
+        ws.onmessage = function(e) {
+            showPass(e.data)
+        };
+        if (sessionStorage.sessName != "undefined" && sessionStorage.sessName != undefined) {
+            ws.send ("getPassTest `"+sessionStorage.sessName);
+        } else {
+            console.info("Session is not logged in")
+        }
+
+     }
+
+    function loginExtra(){
+        setTimeout(function(){showPassed()}, 350);
+    }
+    function logOutExtra(){
+        clearPass()
+    }
+
+
+    window.onload = function () {
+        connect();
+        chkLogin();
+    }
+</script>
+</html>
